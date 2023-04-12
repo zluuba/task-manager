@@ -12,8 +12,11 @@ DEBUG = True        # don't forget change debug to False
 
 
 ALLOWED_HOSTS = [
+    '0.0.0.0',
     '127.0.0.1',
-    'webserver'
+    'localhost',
+    'webserver',
+    '.railway.app',
 ]
 
 INSTALLED_APPS = [
@@ -23,7 +26,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django_extensions',
+    # 'django_filters',
+    'bootstrap4',
     'task_manager',
+    'task_manager.users',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +90,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'

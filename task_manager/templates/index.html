@@ -1,15 +1,25 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Home{% endblock %}
 
 {% block body %}
 
-    <main class="flex-grow-1">
-        <div class="container-lg mt-3 ">
-            <div class="row">
-                <div class="bg-dark p-5 position-absolute top-50 start-50 translate-middle col-lg-8">
-                    <h3 class="d-flex justify-content-center text-light">Home page</h3>
-                </div>
+    <div class="container wrapper flex-grow-1 mt-5">
+        <div class="bg-dark text-light center-block">
+            <div class="card-body p-5 text-center">
+                  <p class="display-3 mt-5 mb-4">Hello there</p>
+                  <p class="lead mx-auto mb-1" style="width: 500px;">
+                      This is the Task Manager,
+                  </p>
+                  <p class="mx-auto" style="width: 500px;">
+                      I allow you to set tasks, assign performers and change their statuses.
+                      Registration and authentication are required to work with my system.
+                  </p>
             </div>
         </div>
-    </main>
+    </div>
 
 {% endblock %}
