@@ -1,16 +1,25 @@
 # Task Manager
 
-[![Actions Status](https://github.com/zluuba/python-project-52/workflows/hexlet-check/badge.svg)](https://github.com/zluuba/python-project-52/actions)
+Not ready yet  ˙◠˙
 
-Task Manager is a task management system (similar to [Redmine](http://www.redmine.org/)). 
-It allows you to set **tasks**, **assign performers** and **change their statuses**. 
-**Registration** and **authentication** are required to work with the system.
+[//]: # ([![Actions Status]&#40;https://github.com/zluuba/python-project-52/workflows/hexlet-check/badge.svg&#41;]&#40;https://github.com/zluuba/python-project-52/actions&#41;)
 
+[//]: # ()
+[//]: # (Task Manager is a task management system &#40;similar to [Redmine]&#40;http://www.redmine.org/&#41;&#41;. )
 
-### Requirements
+[//]: # (It allows you to set **tasks**, **assign performers** and **change their statuses**. )
 
-- [python](https://www.python.org/), version 3.9 or higher
-- [poetry](https://python-poetry.org/docs/#installation), version 1.0.0 or higher
+[//]: # (**Registration** and **authentication** are required to work with the system.)
 
+[//]: # ()
+[//]: # ()
+[//]: # (### Requirements)
 
-by [**zluuba**](https://github.com/zluuba)
+[//]: # ()
+[//]: # (- [python]&#40;https://www.python.org/&#41;, version 3.9 or higher)
+
+[//]: # (- [poetry]&#40;https://python-poetry.org/docs/#installation&#41;, version 1.0.0 or higher)
+
+[//]: # ()
+[//]: # ()
+[//]: # (by [**zluuba**]&#40;https://github.com/zluuba&#41;)
