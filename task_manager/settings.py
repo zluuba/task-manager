@@ -15,9 +15,7 @@ DEBUG = True        # don't forget change debug to False
 
 
 ALLOWED_HOSTS = [
-    '0.0.0.0',
     '127.0.0.1',
-    'localhost',
     'webserver',
     '.railway.app',
 ]
@@ -29,8 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django_extensions',
-    # 'django_filters',
     'bootstrap4',
     'task_manager',
     'task_manager.users',

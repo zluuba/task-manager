@@ -10,7 +10,7 @@ class IndexView(View):
 
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
-        return render(request, 'users/index.html', context={
+        return render(request, 'users/users.html', context={
             'users': users,
         })
 
