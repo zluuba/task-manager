@@ -9,3 +9,6 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = views.page_not_found
+handler500 = views.internal_server_error
