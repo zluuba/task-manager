@@ -1,26 +1,29 @@
-{% extends 'layout.html' %}
+{% extends 'base.html' %}
 
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %}Sign in{% endblock %}
+{% block title %} {{ title }} {% endblock %}
 
 {% block body %}
 
+    <!--    is-valid | is-invalid-->
+
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light" style="width: 400px;">
-        <h1 class="my-4 text-center">Sign in</h1>
-        <form method="post">
+        <h1 class="my-4 text-center">{{ title }}</h1>
+        <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
+
+            {% for field in form %}
             <div class="form-group">
-                <label for="id_username">Username</label>
-                <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" class="form-control bg-dark text-white" placeholder="username" title="" required="" id="id_username">
+                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                <div class="is-invalid">{{ field.errors }}</div>
             </div>
-            <div class="form-group">
-                <label for="id_password">Password</label>
-                <input type="password" name="password" autocomplete="current-password" class="form-control bg-dark text-white" placeholder="password" title="" required="" id="id_password">
-            </div>
+            {% endfor %}
+
             <div class="form-group text-center mt-4 p-3">
-                <input class="btn btn-outline-primary" type="submit" value="Sign in">
+                <input class="btn btn-outline-primary" type="submit" value="{{ title }}">
             </div>
         </form>
     </div>

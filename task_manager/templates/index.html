@@ -1,23 +1,18 @@
-{% extends 'layout.html' %}
+{% extends 'base.html' %}
 
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %}Task manager{% endblock %}
+{% block title %} {{ title }} {% endblock %}
 
 {% block body %}
 
     <div class="container wrapper flex-grow-1 mt-5">
         <div class="bg-dark text-light center-block">
             <div class="card-body p-5 text-center">
-                  <p class="display-3 mt-5 mb-4">Hello there</p>
-                  <p class="lead mx-auto mb-1" style="width: 500px;">
-                      This is the Task Manager,
-                  </p>
-                  <p class="mx-auto" style="width: 500px;">
-                      I allow you to set tasks, assign performers and change their statuses.
-                      Registration and authentication are required to work with my system.
-                  </p>
+                  <p class="display-3 mt-5 mb-4">{{ content.header }}</p>
+                  <p class="lead mx-auto mb-1" style="width: 500px;">{{ content.greetings }}</p>
+                  <p class="mx-auto" style="width: 500px;">{{ content.body }}</p>
             </div>
         </div>
     </div>
