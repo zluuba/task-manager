@@ -8,14 +8,14 @@
 {% block body %}
 
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
-        <h1 class="my-4">{{ content.table_name }}</h1>
+        <h1 class="my-4">{% trans 'Users' %}</h1>
         <table class="table table-striped">
             <thead>
                 <tr class="bg-dark text-light">
-                    <th>{{ content.id }}</th>
-                    <th>{{ content.username }}</th>
-                    <th>{{ content.full_name }}</th>
-                    <th>{{ content.created_at }}</th>
+                    <th>{% trans 'ID' %}</th>
+                    <th>{% trans 'Username' %}</th>
+                    <th>{% trans 'Full name' %}</th>
+                    <th>{% trans 'Created at' %}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -23,13 +23,13 @@
         {% for user in users %}
         <tr class="bg-dark text-light">
             <td>{{ user.id }}</td>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.get_fullname }}</td>
             <td>{{ user.created_at }}</td>
             <td>
-                <a href="{% url 'users_update' user.id %}">{{ content.edit }}</a>
+                <a href="{% url 'users_update' user.id %}">{% trans 'Edit' %}</a>
                 <br>
-                <a href="{% url 'users_delete' user.id %}">{{ content.delete }}</a>
+                <a href="{% url 'users_delete' user.id %}">{% trans 'Delete' %}</a>
             </td>
         </tr>
         {% endfor %}

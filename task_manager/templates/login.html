@@ -9,10 +9,12 @@
 
     <!--    is-valid | is-invalid-->
 
-    <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light" style="width: 400px;">
+    <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light w-50">
         <h1 class="my-4 text-center">{{ title }}</h1>
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
+
+<!--            <div class="form-error">{{ form.non_field_errors }}</div>-->
 
             {% for field in form %}
             <div class="form-group">

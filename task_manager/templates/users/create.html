@@ -9,10 +9,12 @@
 
     <!--    is-valid | is-invalid-->
 
-    <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light" style="width: 400px;">
-        <h1 class="my-4 text-center">{{ title }}</h1>
-        <form action="{% url 'users_create' %}" method="post">
+    <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light w-50" >
+        <h1 class="my-4 text-center">{% trans 'Sign up' %}</h1>
+        <form method="post">
             {% csrf_token %}
+
+<!--            <div class="form-error">{{ form.non_field_errors }}</div>-->
 
             {% for field in form %}
             <div class="form-group text-light">
@@ -23,7 +25,7 @@
             {% endfor %}
 
             <div class="form-group text-center mt-4">
-                <input class="btn btn-outline-primary" type="submit" value="{{ title }}">
+                <input class="btn btn-outline-primary" type="submit" value="{% trans 'Sign up' %}">
             </div>
         </form>
     </div>
