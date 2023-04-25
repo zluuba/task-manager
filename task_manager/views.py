@@ -3,9 +3,6 @@ from django.views import View
 from task_manager.users.forms import LoginForm
 
 
-FOOTER = {'text': 'by zluuba', 'url': 'https://github.com/zluuba'}
-
-
 def index(request):
     title = 'Task manager'
     content = {
@@ -17,7 +14,6 @@ def index(request):
     return render(request, 'index.html', context={
         'title': title,
         'content': content,
-        'footer': FOOTER,
     })
 
 
@@ -28,7 +24,6 @@ class LoginView(View):
         form = LoginForm()
         return render(request, 'login.html', context={
             'title': title,
-            'footer': FOOTER,
             'form': form,
         })
 
@@ -37,7 +32,6 @@ class LoginView(View):
         form = LoginForm()
         return render(request, 'login.html', context={
             'title': title,
-            'footer': FOOTER,
             'form': form,
         })
 
@@ -57,7 +51,6 @@ def page_not_found(request, exception):
     }
     return render(request, "page_not_found.html", context={
         'title': title,
-        'footer': FOOTER,
         'content': content,
     })
 
@@ -71,6 +64,5 @@ def internal_server_error(request):
     }
     return render(request, "internal_server_error.html", context={
         'title': title,
-        'footer': FOOTER,
         'content': content,
     })
