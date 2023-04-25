@@ -1,5 +1,6 @@
 from pathlib import Path
 from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _
 import os
 
 load_dotenv()
@@ -11,7 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True        # don't forget change debug to False
 
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 
 ALLOWED_HOSTS = [
@@ -40,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
@@ -85,7 +87,18 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
+
+LANGUAGES = (
+    ('en-us', _('English')),
+    ('ru', _('Russian')),
+)
+
+# LOCALE_PATHS = (
+#     'task_manager/locale',
+# )
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
