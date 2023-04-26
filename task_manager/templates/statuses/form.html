@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block body %}
+
+    <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light w-50">
+        <h1 class="my-4 text-center">{{ title }}</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group text-center mt-4 p-3">
+                {% bootstrap_button button button_type="submit" button_class="btn btn-outline-primary" %}
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

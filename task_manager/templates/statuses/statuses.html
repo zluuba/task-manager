@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block body %}
+
+    <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
+        <h1 class="my-4">{{ title }}</h1>
+        <a class="btn btn-outline-primary mb-3" href="{% url 'status_create' %}" role="button">
+            {{ create_btn }}
+        </a>
+        <table class="table table-striped">
+            <thead>
+                <tr class="bg-dark text-light">
+                    {% for field in fields %}
+                        <th>{{ field }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+        <tbody>
+        {% for status in statuses %}
+        <tr class="bg-dark text-light">
+            <td>{{ status.id }}</td>
+            <td>{{ status.name }}</td>
+            <td>
+                {{ status.created_at|date:"d.m.Y " }}
+                <br>
+                {{ status.created_at|date:"H:i" }}
+            </td>
+            <td>
+                <a href="{% url 'status_update' user.id %}">{{ edit_btn }}</a>
+                <br>
+                <a href="{% url 'status_delete' user.id %}">{{ delete_btn }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+{% endblock %}
