@@ -10,9 +10,19 @@
     <div class="container wrapper flex-grow-1 mt-5">
         <div class="bg-dark text-light center-block">
             <div class="card-body p-5 text-center">
-                  <p class="display-3 mt-5 mb-4">{{ content.header }}</p>
-                  <p class="lead mx-auto mb-1" style="width: 500px;">{{ content.greetings }}</p>
-                  <p class="mx-auto" style="width: 500px;">{{ content.body }}</p>
+                {% if request.user.is_authenticated %}
+                    <p class="display-4 mt-5 mb-4">{{ greet_user }}
+                        <span class="text-info">{{ user }}</span>
+                    </p>
+                {% else %}
+                    <p class="display-4 mt-5 mb-4">{{ greet_anon }}</p>
+                {% endif %}
+
+                <p class="mx-auto w-50">
+                    {% for part in text %}
+                        {{ part }}
+                    {% endfor %}
+                </p>
             </div>
         </div>
     </div>

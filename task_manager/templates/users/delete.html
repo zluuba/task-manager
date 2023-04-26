@@ -7,10 +7,21 @@
 
 {% block body %}
 
-    <div class="container wrapper flex-grow-1 mt-5 align-middle">
-        <div class="bg-dark text-light mt-5">
-            <div class="card-body p-5 text-center mt-5">
-                  <div class="display-4 mt-5 mb-4">{% trans 'Delete user' %}</div>
+    <div class="container wrapper flex-grow-1 mt-5">
+        <div class="bg-dark text-light center-block">
+            <div class="card-body p-5 text-center">
+                {% if request.user.is_authenticated %}
+                    <p class="display-4 mt-5 mb-4">{{ title }}</p>
+                    <p class="lead mx-auto mb-1 w-50">
+                        {{ text }} {{ user.get_fullname }}?
+                    </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group text-center mt-4">
+                            {% bootstrap_button button button_type="submit" button_class="btn btn-outline-danger" %}
+                        </div>
+                    </form>
+                {% endif %}
             </div>
         </div>
     </div>

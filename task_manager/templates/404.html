@@ -3,16 +3,16 @@
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %} {{ title }} {% endblock %}
+{% block title %} {% trans 'Page not found' %} {% endblock %}
 
 {% block body %}
 
     <div class="container wrapper flex-grow-1 mt-5 align-middle">
         <div class="bg-dark text-light mt-5">
             <div class="card-body p-5 text-center mt-5">
-                <div class="display-4 mt-5">{{ content.sad_smile }}</div>
-                <div class="display-4 mb-4">{{ content.message }}</div>
-                <a href="{% url 'home' %}">{{ content.url_text }}</a>
+                <div class="display-4 mt-5">˙◠˙</div>
+                <div class="display-4 mb-4">{% trans 'Page not found' %}</div>
+                <a href="{% url 'home' %}">{% trans 'Go home' %}</a>
             </div>
         </div>
     </div>
