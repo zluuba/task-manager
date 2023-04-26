@@ -1,14 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
-from task_manager import views
+from task_manager.users.views import UserLoginView, UserLogout
+from task_manager.views import HomeView, test_case
+
 
 urlpatterns = [
-    path('', views.index, name='home'),
+    path('', HomeView.as_view(), name='home'),
     path('users/', include('task_manager.users.urls')),
-    path('login/', views.LoginView.as_view(), name='login'),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('statuses/', include('task_manager.statuses.urls')),
+    # path('labels/', include('task_manager.labels.urls')),
+    # path('tasks/', include('task_manager.tasks.urls')),
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('logout/', UserLogout.as_view(), name='logout'),
     path('admin/', admin.site.urls),
-]
 
-handler404 = views.page_not_found
-handler500 = views.internal_server_error
+    path('test/', test_case)
+]
