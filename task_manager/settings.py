@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True        # don't forget change debug to False
 
 
-AUTH_USER_MODEL = 'users.User'
+# AUTH_USER_MODEL = 'users.User'
 
 
 ALLOWED_HOSTS = [
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'task_manager',
     'task_manager.users',
+    'task_manager.statuses',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'production': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': BASE_DIR / 'postgresql',
+        # "USER": "mydatabaseuser",
+        # "PASSWORD": "mypassword",
+        # "HOST": "127.0.0.1",
+        # "PORT": "5432",
     }
 }
 
@@ -86,18 +95,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'ru'
 
 LANGUAGES = (
     ('en-us', _('English')),
     ('ru', _('Russian')),
 )
 
-# LOCALE_PATHS = (
-#     'task_manager/locale',
-# )
+LOCALE_PATHS = (
+    'task_manager/locale',
+)
 
 TIME_ZONE = 'UTC'
 
