@@ -1,12 +1,15 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
+
+from task_manager.utils import AuthorizationCheck
 
 from .models import Status
 from .forms import StatusForm
 
 
-class StatusesView(ListView):
+class StatusesView(AuthorizationCheck, ListView):
     model = Status
     context_object_name = 'statuses'
     template_name = 'statuses/statuses.html'
@@ -19,7 +22,7 @@ class StatusesView(ListView):
     }
 
 
-class StatusCreateView(CreateView):
+class StatusCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
     form_class = StatusForm
     template_name = 'statuses/form.html'
     success_url = reverse_lazy('statuses')
@@ -30,7 +33,7 @@ class StatusCreateView(CreateView):
     }
 
 
-class StatusUpdateView(UpdateView):
+class StatusUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
     template_name = 'statuses/form.html'
@@ -42,7 +45,7 @@ class StatusUpdateView(UpdateView):
     }
 
 
-class StatusDeleteView(DeleteView):
+class StatusDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses')
