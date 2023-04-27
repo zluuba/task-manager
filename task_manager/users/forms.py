@@ -1,47 +1,41 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.utils.translation import gettext as _
-from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from .models import User
 
+from task_manager.utils import get_form_fields
 
-CLASS_WID = {'class': 'form-control bg-dark text-white'}
+FIELDS = get_form_fields()
 
 
-class UserForm(UserCreationForm):
+class UserCreateForm(UserCreationForm):
     """
-    Change the form - should be smaller (+ don't double LoginForm)
-    Add clear method (?)
+    Do something with fields.
+    Get rid of get_form_fields func
     """
-
-    first_name = forms.CharField(
-        label=_('First name'),
-        widget=forms.TextInput(attrs=CLASS_WID))
-    last_name = forms.CharField(
-        label=_('Last name'),
-        widget=forms.TextInput(attrs=CLASS_WID))
-    username = forms.CharField(
-        label=_('Username'),
-        widget=forms.TextInput(attrs=CLASS_WID))
-
-    password1 = forms.CharField(
-        label=_('Password'),
-        widget=forms.PasswordInput(attrs=CLASS_WID))
-    password2 = forms.CharField(
-        label=_('Confirm password'),
-        widget=forms.PasswordInput(attrs=CLASS_WID))
+    first_name, last_name, username, \
+        password1, password2 = [field for field in FIELDS.values()]
 
     class Meta:
         model = User
         fields = [
             'first_name', 'last_name', 'username',
-            'password1', 'password2'
+            'password1', 'password2',
+        ]
+
+
+class UserUpdateForm(UserChangeForm):
+    first_name, last_name, username, \
+        password1, password2 = [field for field in FIELDS.values()]
+
+    password = None
+
+    class Meta:
+        model = User
+        fields = [
+            'first_name', 'last_name', 'username',
         ]
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(
-        label=_('Username'),
-        widget=forms.TextInput(attrs=CLASS_WID))
-    password = forms.CharField(
-        label=_('Password'),
-        widget=forms.PasswordInput(attrs=CLASS_WID))
+    fields = get_form_fields(help_text=False)
+    username = fields['username']
+    password = fields['password1']
