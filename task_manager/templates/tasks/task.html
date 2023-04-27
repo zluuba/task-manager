@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block body %}
+
+    <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
+        <h1 class="my-4">{{ title }}</h1>
+        <div class="card">
+            <div class="card-header bg-dark text-light border-bottom">
+                <h2 class="mb-1">{{ task.name }}</h2>
+            </div>
+            <div class="card-body bg-dark">
+                <p>{{ task.description }}</p>
+                <hr class="bg-secondary">
+                <div class="container">
+                    <div class="row p-1">
+                        <div class="col">{% trans 'Author' %}</div>
+                        <div class="col">{{ task.author }}</div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">{% trans 'Created at' %}</div>
+                        <div class="col">{{ task.created_at|date:"d.m.Y H:i" }}</div>
+                    </div>
+
+<!--                    <div class="row p-1">-->
+<!--                        <div class="col">-->
+<!--                            <h6>Метки:</h6>-->
+<!--                            <ul>-->
+<!--                                <li>Метка</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                    <div class="row p-2 mt-2 d-flex justify-content-end">
+                        <a class="btn btn-outline-primary mr-2" href="{% url 'task_update' task.id %}" role="button">
+                            {{ edit_btn }}
+                        </a>
+                        <a class="btn btn-outline-danger" href="{% url 'task_delete' task.id %}" role="button">
+                            {{ delete_btn }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -11,18 +11,19 @@
         <div class="bg-dark text-light center-block">
             <div class="card-body p-5 text-center">
                 {% if request.user.is_authenticated %}
-                    <p class="display-4 mt-5 mb-4">{{ greet_user }}
+                    <p class="display-4 mt-5 mb-4">
+                        {% trans 'Hello, ' %}
                         <span class="text-info">{{ user }}</span>
                     </p>
+                    <p class="lead mb-0">{% trans "It's been a long time." %}</p>
+                    <p class="mb-0">{% trans "How you doin'?" %}</p>
                 {% else %}
-                    <p class="display-4 mt-5 mb-4">{{ greet_anon }}</p>
+                    <p class="display-4 mt-5 mb-4">{% trans 'Hello there' %}</p>
+                    <p class="mx-auto w-50">
+                    <p class="lead">{% trans 'This is the Task Manager,' %}</p>
+                    <p class="mb-0">{% trans 'I allow you to set tasks, assign performers and change their statuses.' %}</p>
+                    <p>{% trans 'Registration and authentication are required to work with my system.' %}</p>
                 {% endif %}
-
-                <p class="mx-auto w-50">
-                    {% for part in text %}
-                        {{ part }}
-                    {% endfor %}
-                </p>
             </div>
         </div>
     </div>

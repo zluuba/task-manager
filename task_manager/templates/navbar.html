@@ -16,10 +16,10 @@
                 <a class="nav-link text-light-emphasis" href="{% url 'statuses' %}">{% trans 'Statuses' %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light-emphasis" href="#">{% trans 'Labels' %}</a>
+                <a class="nav-link text-light-emphasis" href="{% url 'home' %}">{% trans 'Labels' %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light-emphasis" href="#">{% trans 'Tasks' %}</a>
+                <a class="nav-link text-light-emphasis" href="{% url 'tasks' %}">{% trans 'Tasks' %}</a>
             </li>
             {% endif %}
         </ul>
@@ -27,14 +27,17 @@
         <ul class="navbar-nav">
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'logout' %}">{% trans 'Sign out' %}</a>
+                    <p class="nav-link text-info user-select-none my-0">{{ user.username }}</p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light-emphasis" href="{% url 'logout' %}">{% trans 'Sign out' %}</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'login' %}">{% trans 'Sign in' %}</a>
+                    <a class="nav-link text-light-emphasis" href="{% url 'login' %}">{% trans 'Sign in' %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{% url 'users_create' %}">{% trans 'Sign up' %}</a>
+                    <a class="nav-link text-light-emphasis" href="{% url 'users_create' %}">{% trans 'Sign up' %}</a>
                 </li>
             {% endif %}
         </ul>
