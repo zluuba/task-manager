@@ -9,7 +9,7 @@ install:
 	poetry install
 
 lint:
-	poetry run flake8 task_manager
+	flake8 task_manager
 
 test:
 	poetry run pytest
