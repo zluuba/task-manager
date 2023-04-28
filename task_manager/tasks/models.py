@@ -1,14 +1,17 @@
 from django.db import models
 from task_manager.users.models import User
-# from django.conf import settings
-# from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
+from task_manager.statuses.models import Status
 
 
 class Task(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True, blank=False)
     description = models.TextField(blank=True)
-    author = models.ForeignKey(User, on_delete=models.PROTECT)
-    # performer = models.ForeignKey(User, on_delete=models.PROTECT)
-    # status = models.ForeignKey(Status, on_delete=models.models.PROTECT)
-    # labels = models.ManyToManyField(Status, blank=True)
+    author = models.ForeignKey(User, related_name='author', on_delete=models.PROTECT)
+    performer = models.ForeignKey(User, related_name='performer', null=True, blank=True, on_delete=models.PROTECT)
+    status = models.ForeignKey(Status, related_name='status', on_delete=models.PROTECT)
+    labels = models.ManyToManyField(Label, related_name='labels', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
