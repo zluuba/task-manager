@@ -10,7 +10,7 @@
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
         <h1 class="my-4">{{ title }}</h1>
         <div class="card">
-            <div class="card-header bg-dark text-light border-bottom">
+            <div class="card-header bg-dark text-info border-bottom">
                 <h2 class="mb-1">{{ task.name }}</h2>
             </div>
             <div class="card-body bg-dark">
@@ -22,18 +22,28 @@
                         <div class="col">{{ task.author }}</div>
                     </div>
                     <div class="row p-1">
+                        <div class="col">{% trans 'Performer' %}</div>
+                        <div class="col">{{ task.performer }}</div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">{% trans 'Status' %}</div>
+                        <div class="col">{{ task.status }}</div>
+                    </div>
+                    <div class="row p-1">
                         <div class="col">{% trans 'Created at' %}</div>
                         <div class="col">{{ task.created_at|date:"d.m.Y H:i" }}</div>
                     </div>
 
-<!--                    <div class="row p-1">-->
-<!--                        <div class="col">-->
-<!--                            <h6>Метки:</h6>-->
-<!--                            <ul>-->
-<!--                                <li>Метка</li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="row p-1">
+                        <div class="col">
+                            <h6>{% trans 'Labels:' %}</h6>
+                            <ul>
+                                {% for label in task.labels.all %}
+                                <li>{{ label.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
 
                     <div class="row p-2 mt-2 d-flex justify-content-end">
                         <a class="btn btn-outline-primary mr-2" href="{% url 'task_update' task.id %}" role="button">

@@ -10,10 +10,7 @@
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
         <div class="d-flex my-3">
             <h1 class="flex-grow-1">{{ title }}</h1>
-            <a class="btn btn-outline-primary align-self-center mx-2" href="#" role="button">
-                {% trans 'Filter' %}
-            </a>
-            <a class="btn btn-outline-primary align-self-center" href="{% url 'task_create' %}" role="button">
+            <a class="btn btn-outline-primary align-self-center" href="{% url 'label_create' %}" role="button">
                 {{ create_btn }}
             </a>
         </div>
@@ -26,22 +23,19 @@
                 </tr>
             </thead>
         <tbody>
-        {% for task in tasks %}
+        {% for label in labels %}
         <tr class="bg-dark text-light">
-            <td>{{ task.id }}</td>
-            <td><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
-            <td>{{ task.status }}</td>
-            <td>{{ task.author }}</td>
-            <td>{% if task.performer %}{{ task.performer }}{% endif %}</td>
+            <td>{{ label.id }}</td>
+            <td>{{ label.name }}</td>
             <td>
-                {{ task.created_at|date:"d.m.Y " }}
+                {{ label.created_at|date:"d.m.Y " }}
                 <br>
-                {{ task.created_at|date:"H:i" }}
+                {{ label.created_at|date:"H:i" }}
             </td>
             <td>
-                <a href="{% url 'task_update' task.pk %}">{{ edit_btn }}</a>
+                <a href="{% url 'label_update' label.id %}">{{ edit_btn }}</a>
                 <br>
-                <a href="{% url 'task_delete' task.pk %}">{{ delete_btn }}</a>
+                <a href="{% url 'label_delete' label.id %}">{{ delete_btn }}</a>
             </td>
         </tr>
         {% endfor %}
