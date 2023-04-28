@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'task_manager.statuses',
     'task_manager.tasks',
     'task_manager.labels',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -67,13 +68,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'task_manager.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app'
+]
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'production': dj_database_url.config(
-        default='postgresql:///db.postgresql',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # },
+    'default': dj_database_url.config(
         conn_max_age=600,
     )
 }
