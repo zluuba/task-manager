@@ -9,10 +9,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = True        # don't forget change debug to False
-
-
-# AUTH_USER_MODEL = 'users.User'
+DEBUG = False        # don't forget change debug to False
 
 
 ALLOWED_HOSTS = [
@@ -76,10 +73,15 @@ DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
-    'default': dj_database_url.config(
-        conn_max_age=600,
-    )
+    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '<PGDATABASE>',
+        'USER': '<PGUSER>',
+        'PASSWORD': '<PGPASSWORD>',
+        'HOST': '<PGHOST>',
+        'PORT': '<PGPORT>',
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
