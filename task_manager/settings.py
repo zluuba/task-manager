@@ -80,7 +80,7 @@ DATABASES = {
         'USER': '<PGUSER>',
         'PASSWORD': '<PGPASSWORD>',
         'HOST': '<PGHOST>',
-        'PORT': '<PGPORT>',
+        'PORT': 6429,
     }
 }
 
