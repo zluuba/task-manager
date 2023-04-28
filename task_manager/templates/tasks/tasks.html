@@ -10,13 +10,19 @@
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
         <div class="d-flex my-3">
             <h1 class="flex-grow-1">{{ title }}</h1>
-            <a class="btn btn-outline-primary align-self-center mx-2" href="#" role="button">
-                {% trans 'Filter' %}
-            </a>
-            <a class="btn btn-outline-primary align-self-center" href="{% url 'task_create' %}" role="button">
-                {{ create_btn }}
-            </a>
+            {% url 'task_create' as create_url %}
+            {% bootstrap_button create_btn button_class="btn btn-outline-primary align-self-center" href=create_url %}
         </div>
+
+        <div class="card mb-3 border-secondary mb-3">
+            <div class="card-body bg-dark">
+                <form class="form-inline center" method="get">
+                  {% bootstrap_form filter.form field_class="mx-4" %}
+                  {% bootstrap_button filter_btn button_type="submit" button_class="btn btn-outline-primary" %}
+                </form>
+            </div>
+        </div>
+
         <table class="table table-striped">
             <thead>
                 <tr class="bg-dark text-light">
@@ -32,7 +38,7 @@
             <td><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
             <td>{{ task.status }}</td>
             <td>{{ task.author }}</td>
-            <td>{% if task.performer %}{{ task.performer }}{% endif %}</td>
+            <td>{% if task.executor %}{{ task.executor }}{% endif %}</td>
             <td>
                 {{ task.created_at|date:"d.m.Y " }}
                 <br>
