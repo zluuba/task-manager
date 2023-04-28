@@ -9,6 +9,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+DATABASE_URL = os.getenv("DATABASE_URL")
 DEBUG = False        # don't forget change debug to False
 
 
@@ -74,14 +75,15 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'FRmSi3HiHPDq0smVmZdc',
-        'HOST': 'containers-us-west-65.railway.app',
-        'PORT': 6429,
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'railway',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'FRmSi3HiHPDq0smVmZdc',
+    #     'HOST': 'containers-us-west-65.railway.app',
+    #     'PORT': 6429,
+    # }
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
 
 AUTH_PASSWORD_VALIDATORS = [
