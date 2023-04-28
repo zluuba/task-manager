@@ -1,4 +1,6 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+from django_filters.views import FilterView
+from task_manager.tasks.filters import TaskFilter
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
@@ -10,17 +12,19 @@ from .models import Task
 from .forms import TaskForm
 
 
-class TasksView(AuthorizationCheck, ListView):
+class TasksView(AuthorizationCheck, FilterView):
     model = Task
+    filterset_class = TaskFilter
     context_object_name = 'tasks'
     template_name = 'tasks/tasks.html'
     extra_context = {
         'title': _('Tasks'),                                        # ru: "Задачи"
         'fields': ['ID', _('Name'), _('Status'), _('Author'),       # ru: "Имя", "Статус", "Автор"
-                   _('Performer'), _('Created at'), ''],            # ru: "Исполнитель", "Дата создания"
+                   _('Executor'), _('Created at'), ''],            # ru: "Исполнитель", "Дата создания"
         'create_btn': _('Create task'),                             # ru: "Создать"
         'edit_btn': _('Edit'),                                      # ru: "Изменить"
         'delete_btn': _('Delete'),                                  # ru: "Удалить"
+        'filter_btn': _('Show'),                                    # ru: "Показать"
     }
 
 
@@ -30,7 +34,7 @@ class TaskView(AuthorizationCheck, DetailView):
     extra_context = {
         'title': _('Task preview'),                                 # ru: "Просмотр задачи"
         'fields': ['ID', _('Name'), _('Status'), _('Author'),
-                   _('Performer'), _('Created at'), ''],
+                   _('Executor'), _('Created at'), ''],
         'edit_btn': _('Edit'),
         'delete_btn': _('Delete'),
     }
