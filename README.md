@@ -4,8 +4,7 @@
 [![Project Check](https://github.com/zluuba/python-project-52/actions/workflows/project-check.yml/badge.svg)](https://github.com/zluuba/python-project-52/actions/workflows/project-check.yml)
 
 
-Not ready yet  ˙◠˙
-
+Almost ready  ˙◡˙
 
 
 [//]: # ()
