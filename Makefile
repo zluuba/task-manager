@@ -12,7 +12,9 @@ lint:
 	flake8 task_manager
 
 test:
-	poetry run pytest
+	poetry run python3 manage.py test
 
 test-coverage:
-	poetry run pytest --cov=task_manager --cov-report xml
+	poetry run coverage run manage.py test
+	poetry run coverage xml --include=task_manager/* --omit=task_manager/settings.py
+	poetry run coverage report -m --include=task_manager/* --omit=task_manager/settings.py
