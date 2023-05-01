@@ -7,7 +7,3 @@ class HomeView(TemplateView):
     extra_context = {
         'title': _('Task manager'),
     }
-
-
-def test_case(request):
-    raise Exception('This is a test error')
