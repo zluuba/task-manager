@@ -48,7 +48,7 @@ class UserLogout(View):
         return redirect('home')
 
 
-class UserCreateView(CreateView):
+class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = UserCreateForm
     template_name = 'users/form.html'
     success_url = reverse_lazy('login')
@@ -59,7 +59,9 @@ class UserCreateView(CreateView):
     }
 
 
-class UserUpdateView(UserPermissions, AuthorizationCheck, UpdateView):
+class UserUpdateView(
+    UserPermissions, AuthorizationCheck, SuccessMessageMixin, UpdateView
+):
     model = User
     form_class = UserUpdateForm
     template_name = 'users/form.html'
