@@ -61,3 +61,23 @@ class TaskPermissions:
             return redirect('tasks')
 
         return super().dispatch(request, *args, **kwargs)
+
+
+class StatusPermissions:
+    """
+    Checks permissions to task deleting.
+    If the user is not the author of the task, task will not be deleted.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        task_author = str(Task.objects.get(pk=kwargs['pk']).author)
+        curr_user = str(request.user)
+
+        if curr_user != task_author:
+            messages.error(
+                request, _('The task can be deleted only by its author')
+            )
+            # ru: "Задачу может удалить только её автор"
+            return redirect('tasks')
+
+        return super().dispatch(request, *args, **kwargs)

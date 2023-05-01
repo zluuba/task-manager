@@ -1,9 +1,12 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 from task_manager.utils import AuthorizationCheck
+from task_manager.tasks.models import Task
 
 from .models import Status
 from .forms import StatusForm
@@ -55,3 +58,21 @@ class StatusDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
         'text': _('Are you sure you want to delete '),
         'button': _('Yes, delete'),
     }
+
+    def post(self, request, *args, **kwargs):
+        label_id = kwargs['pk']
+        tasks_with_label = Task.objects.filter(labels=label_id)
+
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            if not tasks_with_label:
+                return self.form_valid(form)
+            messages.error(
+                self.request,
+                _('It is not possible to delete a status because it is in use')
+            )
+            # ru: "Невозможно удалить статус, потому что он используется"
+            return redirect('labels')
+        else:
+            return self.form_invalid(form)

@@ -70,7 +70,7 @@ class LabelDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
                 return self.form_valid(form)
             messages.error(
                 self.request,
-                'It is not possible to delete a label because it is in use'
+                _('It is not possible to delete a label because it is in use')
             )
             # ru: "Невозможно удалить метку, потому что она используется"
             return redirect('labels')

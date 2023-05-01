@@ -92,7 +92,7 @@ class UserDeleteView(
 
         if user_tasks:
             messages.error(
-                self.request, 'Cannot delete a user because he is being used'
+                self.request, _('Cannot delete a user because he is being used')
             )
             # ru: "Невозможно удалить пользователя, потому что он используется"
             return redirect('users')
