@@ -4,12 +4,6 @@ from django.contrib import messages
 
 from task_manager.tasks.models import Task
 
-from django.utils.translation import gettext as _
-from django import forms
-
-
-CLASS_WID = {'class': 'form-control bg-dark text-white'}
-
 
 class AuthorizationCheck(LoginRequiredMixin):
     """
@@ -60,36 +54,3 @@ class TaskPermissions:
             return redirect('tasks')
 
         return super().dispatch(request, *args, **kwargs)
-
-
-def get_form_fields(help_text=True):
-    return {
-        'first_name': forms.CharField(
-            label=_('First name'),
-            widget=forms.TextInput(attrs=CLASS_WID)
-        ),
-        'last_name': forms.CharField(
-            label=_('Last name'),
-            widget=forms.TextInput(attrs=CLASS_WID)
-        ),
-        'username': forms.CharField(
-            label=_('Username'),
-            widget=forms.TextInput(attrs=CLASS_WID),
-            help_text='Required. 150 characters or fewer. '
-                      'Letters, digits and @/./+/-/_ only.'
-            if help_text else ''
-        ),
-
-        'password1': forms.CharField(
-            label=_('Password'),
-            widget=forms.PasswordInput(attrs=CLASS_WID),
-            help_text='Your password must contain at least 3 characters.'
-            if help_text else ''
-        ),
-        'password2': forms.CharField(
-            label=_('Confirm password'),
-            widget=forms.PasswordInput(attrs=CLASS_WID),
-            help_text='Enter the same password as before, for verification.'
-            if help_text else ''
-        ),
-    }

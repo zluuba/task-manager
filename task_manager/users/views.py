@@ -34,7 +34,7 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     success_message = _('You are logged in')                    # ru: "Вы залогинены"
     extra_context = {
         'title': _('Sign in'),                                  # ru: "Вход"
-        'button': _('Sign in'),                                 # ru: "Войти"
+        'button': _('Enter'),                                   # ru: "Войти"
     }
 
     def get_success_url(self):

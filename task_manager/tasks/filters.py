@@ -19,7 +19,7 @@ class TaskFilter(FilterSet):
         label=_('Executor'), queryset=User.objects.all(), widget=Select(attrs=CLASS_WID),
     )
     labels = ModelChoiceFilter(
-        label=_('Labels'), queryset=Label.objects.all(), widget=Select(attrs=CLASS_WID),
+        label=_('Label'), queryset=Label.objects.all(), widget=Select(attrs=CLASS_WID),
     )
     only_mine_tasks = BooleanFilter(
         label=_('Only my tasks'), method='get_my_tasks', widget=CheckboxInput,

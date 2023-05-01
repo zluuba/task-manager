@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 09:27+0300\n"
+"POT-Creation-Date: 2023-05-01 11:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,15 +20,17 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/labels/views.py:20 task_manager/tasks/filters.py:22
+#: task_manager/labels/models.py:8 task_manager/labels/views.py:21
+#: task_manager/statuses/models.py:8 task_manager/statuses/views.py:18
+#: task_manager/tasks/models.py:11 task_manager/tasks/views.py:22
+#: task_manager/tasks/views.py:36
+msgid "Name"
+msgstr "Имя"
+
+#: task_manager/labels/views.py:20 task_manager/tasks/models.py:30
 #: task_manager/templates/navbar.html:19
 msgid "Labels"
 msgstr "Метки"
-
-#: task_manager/labels/views.py:21 task_manager/statuses/views.py:18
-#: task_manager/tasks/views.py:22 task_manager/tasks/views.py:36
-msgid "Name"
-msgstr "Имя"
 
 #: task_manager/labels/views.py:21 task_manager/statuses/views.py:18
 #: task_manager/tasks/views.py:23 task_manager/tasks/views.py:37
@@ -67,7 +69,7 @@ msgstr "Метка успешно изменена"
 
 #: task_manager/labels/views.py:46
 msgid "Update label"
-msgstr "Изменить метку"
+msgstr "Изменение метки"
 
 #: task_manager/labels/views.py:47 task_manager/statuses/views.py:44
 #: task_manager/tasks/views.py:67 task_manager/users/views.py:70
@@ -110,7 +112,7 @@ msgstr "Статус успешно изменён"
 
 #: task_manager/statuses/views.py:43
 msgid "Update status"
-msgstr "Изменить статус"
+msgstr "Изменение статус"
 
 #: task_manager/statuses/views.py:52
 msgid "Status successfully deleted"
@@ -120,28 +122,38 @@ msgstr "Статус успешно удалён"
 msgid "Delete status"
 msgstr "Удаление статуса"
 
-#: task_manager/tasks/filters.py:16 task_manager/tasks/views.py:22
-#: task_manager/tasks/views.py:36 task_manager/templates/tasks/task.html:29
+#: task_manager/tasks/filters.py:16 task_manager/tasks/models.py:26
+#: task_manager/tasks/views.py:22 task_manager/tasks/views.py:36
+#: task_manager/templates/tasks/task.html:29
 msgid "Status"
 msgstr "Статус"
 
-#: task_manager/tasks/filters.py:19 task_manager/tasks/views.py:23
-#: task_manager/tasks/views.py:37 task_manager/templates/tasks/task.html:25
+#: task_manager/tasks/filters.py:19 task_manager/tasks/models.py:22
+#: task_manager/tasks/views.py:23 task_manager/tasks/views.py:37
+#: task_manager/templates/tasks/task.html:25
 msgid "Executor"
 msgstr "Исполнитель"
+
+#: task_manager/tasks/filters.py:22
+msgid "Label"
+msgstr "Метка"
 
 #: task_manager/tasks/filters.py:25
 msgid "Only my tasks"
 msgstr "Только свои задачи"
 
+#: task_manager/tasks/models.py:15
+msgid "Description"
+msgstr "Описание"
+
+#: task_manager/tasks/models.py:18 task_manager/tasks/views.py:22
+#: task_manager/tasks/views.py:36 task_manager/templates/tasks/task.html:21
+msgid "Author"
+msgstr "Автор"
+
 #: task_manager/tasks/views.py:21 task_manager/templates/navbar.html:22
 msgid "Tasks"
 msgstr "Задачи"
-
-#: task_manager/tasks/views.py:22 task_manager/tasks/views.py:36
-#: task_manager/templates/tasks/task.html:21
-msgid "Author"
-msgstr "Автор"
 
 #: task_manager/tasks/views.py:24 task_manager/tasks/views.py:49
 msgid "Create task"
@@ -213,7 +225,9 @@ msgstr "Я помогаю ставить задачи, назначать отв
 
 #: task_manager/templates/index.html:25
 msgid "Registration and authentication are required to work with my system."
-msgstr "Для того, чтобы воспользоваться всем функционалом, пожалуйста, войдите или зарегистрируйтесь."
+msgstr ""
+"Для того, чтобы воспользоваться всем функционалом, пожалуйста, войдите или "
+"зарегистрируйтесь."
 
 #: task_manager/templates/navbar.html:5 task_manager/views.py:8
 msgid "Task manager"
@@ -228,7 +242,6 @@ msgid "Sign out"
 msgstr "Выход"
 
 #: task_manager/templates/navbar.html:37 task_manager/users/views.py:36
-#: task_manager/users/views.py:37
 msgid "Sign in"
 msgstr "Вход"
 
@@ -241,7 +254,7 @@ msgstr "Регистрация"
 msgid "Labels:"
 msgstr "Метки:"
 
-#: task_manager/users/views.py:24 task_manager/utils.py:76
+#: task_manager/users/views.py:24
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -252,6 +265,10 @@ msgstr "Полное имя"
 #: task_manager/users/views.py:34
 msgid "You are logged in"
 msgstr "Вы залогинены"
+
+#: task_manager/users/views.py:37
+msgid "Enter"
+msgstr "Войти"
 
 #: task_manager/users/views.py:47
 msgid "You are logged out"
@@ -267,7 +284,7 @@ msgstr "Пользователь успешно изменён"
 
 #: task_manager/users/views.py:69
 msgid "Update user"
-msgstr "Изменить пользователя"
+msgstr "Изменение пользователя"
 
 #: task_manager/users/views.py:78
 msgid "User successfully deleted"
@@ -275,20 +292,16 @@ msgstr "Пользователь успешно удалён"
 
 #: task_manager/users/views.py:80
 msgid "Delete user"
-msgstr "Удалить пользователя"
+msgstr "Удаление пользователя"
 
-#: task_manager/utils.py:68
-msgid "First name"
-msgstr "Имя"
+#~ msgid "First name"
+#~ msgstr "Имя"
 
-#: task_manager/utils.py:72
-msgid "Last name"
-msgstr "Фамилия"
+#~ msgid "Last name"
+#~ msgstr "Фамилия"
 
-#: task_manager/utils.py:84
-msgid "Password"
-msgstr "Пароль"
+#~ msgid "Password"
+#~ msgstr "Пароль"
 
-#: task_manager/utils.py:90
-msgid "Confirm password"
-msgstr "Подтверждение пароля"
+#~ msgid "Confirm password"
+#~ msgstr "Подтверждение пароля"

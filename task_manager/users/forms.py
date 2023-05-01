@@ -1,19 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from .models import User
 
-from task_manager.utils import get_form_fields
-
-FIELDS = get_form_fields()
+# from task_manager.utils import UserFormFields
 
 
 class UserCreateForm(UserCreationForm):
-    """
-    Do something with fields.
-    Get rid of get_form_fields func
-    """
-    first_name, last_name, username, \
-        password1, password2 = [field for field in FIELDS.values()]
-
     class Meta:
         model = User
         fields = [
@@ -23,9 +14,6 @@ class UserCreateForm(UserCreationForm):
 
 
 class UserUpdateForm(UserChangeForm):
-    first_name, last_name, username, \
-        password1, password2 = [field for field in FIELDS.values()]
-
     password = None
 
     class Meta:
@@ -36,6 +24,8 @@ class UserUpdateForm(UserChangeForm):
 
 
 class LoginForm(AuthenticationForm):
-    fields = get_form_fields(help_text=False)
-    username = fields['username']
-    password = fields['password1']
+    class Meta:
+        model = User
+        fields = [
+            'username', 'password1',
+        ]
