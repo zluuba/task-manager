@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 11:44+0300\n"
+"POT-Creation-Date: 2023-05-01 12:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgid "Update label"
 msgstr "Изменение метки"
 
 #: task_manager/labels/views.py:47 task_manager/statuses/views.py:44
-#: task_manager/tasks/views.py:67 task_manager/users/views.py:70
+#: task_manager/tasks/views.py:67 task_manager/users/views.py:72
 msgid "Update"
 msgstr "Изменить"
 
@@ -85,12 +85,12 @@ msgid "Delete label"
 msgstr "Удаление метки"
 
 #: task_manager/labels/views.py:58 task_manager/statuses/views.py:55
-#: task_manager/tasks/views.py:80 task_manager/users/views.py:83
+#: task_manager/tasks/views.py:80 task_manager/users/views.py:85
 msgid "Are you sure you want to delete "
 msgstr "Вы уверены, что хотите удалить "
 
 #: task_manager/labels/views.py:59 task_manager/statuses/views.py:56
-#: task_manager/tasks/views.py:81 task_manager/users/views.py:84
+#: task_manager/tasks/views.py:81 task_manager/users/views.py:86
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
@@ -253,6 +253,14 @@ msgstr "Регистрация"
 msgid "Labels:"
 msgstr "Метки:"
 
+#: task_manager/users/forms.py:23
+msgid "Password"
+msgstr "Пароль"
+
+#: task_manager/users/forms.py:26
+msgid "Confirm password"
+msgstr "Подтверждение пароля"
+
 #: task_manager/users/views.py:24
 msgid "Username"
 msgstr "Имя пользователя"
@@ -281,30 +289,36 @@ msgstr "Пользователь успешно зарегистрирован"
 msgid "Register"
 msgstr "Зарегистрировать"
 
-#: task_manager/users/views.py:67
+#: task_manager/users/views.py:69
 msgid "User is successfully updated"
 msgstr "Пользователь успешно изменён"
 
-#: task_manager/users/views.py:69
+#: task_manager/users/views.py:71
 msgid "Update user"
 msgstr "Изменение пользователя"
 
-#: task_manager/users/views.py:80
+#: task_manager/users/views.py:82
 msgid "User successfully deleted"
 msgstr "Пользователь успешно удалён"
 
-#: task_manager/users/views.py:82
+#: task_manager/users/views.py:84
 msgid "Delete user"
 msgstr "Удаление пользователя"
+
+#: task_manager/utils.py:18
+msgid "You are not logged in! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: task_manager/utils.py:38
+msgid "You have no rights to change another user."
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: task_manager/utils.py:58
+msgid "The task can be deleted only by its author"
+msgstr "Задачу может удалить только её автор"
 
 #~ msgid "First name"
 #~ msgstr "Имя"
 
 #~ msgid "Last name"
 #~ msgstr "Фамилия"
-
-#~ msgid "Password"
-#~ msgstr "Пароль"
-
-#~ msgid "Confirm password"
-#~ msgstr "Подтверждение пароля"
