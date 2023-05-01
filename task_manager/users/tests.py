@@ -46,10 +46,12 @@ class UserViewsTestCase(SetUpTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='users/form.html')
         # user modification
-        response = self.client.get(reverse_lazy('users_update', kwargs={'pk': 1}))
+        response = self.client.get(reverse_lazy('users_update',
+                                                kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('users'))
         # user deletion
-        response = self.client.get(reverse_lazy('users_delete', kwargs={'pk': 1}))
+        response = self.client.get(reverse_lazy('users_delete',
+                                                kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('users'))
