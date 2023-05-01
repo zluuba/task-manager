@@ -29,9 +29,9 @@ class LabelCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
     form_class = LabelForm
     template_name = 'labels/form.html'
     success_url = reverse_lazy('labels')
-    success_message = _('Label successfully created')      # ru: "Статус успешно создан"
+    success_message = _('Label successfully created')      # ru: "Метка успешно создана"
     extra_context = {
-        'title': _('Create label'),                        # ru: "Создать статус"
+        'title': _('Create label'),                        # ru: "Создать метку"
         'button': _('Create'),                              # ru: "Создать"
     }
 
@@ -41,9 +41,9 @@ class LabelUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     form_class = LabelForm
     template_name = 'labels/form.html'
     success_url = reverse_lazy('labels')
-    success_message = _('Label is successfully updated')   # ru: "Статус успешно изменён"
+    success_message = _('Label is successfully updated')   # ru: "Метка успешно изменена"
     extra_context = {
-        'title': _('Update label'),                        # ru: "Изменить статус"
+        'title': _('Update label'),                        # ru: "Изменить метку"
         'button': _('Update'),                              # ru: "Изменить"
     }
 
@@ -52,9 +52,9 @@ class LabelDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels')
-    success_message = _('Label successfully deleted')      # ru: "Статус успешно удалён"
+    success_message = _('Label successfully deleted')      # ru: "Метка успешно удалена"
     extra_context = {
-        'title': _('Delete label'),                        # ru: "Удаление статуса"
+        'title': _('Delete label'),                        # ru: "Удаление метки"
         'text': _('Are you sure you want to delete '),      # ru: "Вы уверены, что хотите удалить "
         'button': _('Yes, delete'),                         # ru: "Да, удалить"
     }

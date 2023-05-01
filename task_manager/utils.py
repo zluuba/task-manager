@@ -27,9 +27,9 @@ class AuthorizationCheck(LoginRequiredMixin):
 
 class UserPermissions:
     """
-    Checks permissions to user updating or deleting.
+    Checks updating / deleting (user acc) permissions.
     If the selected user is not the current user,
-    user will not be updating or deleting.
+    user will not be updating / deleting.
     """
 
     def dispatch(self, request, *args, **kwargs):
