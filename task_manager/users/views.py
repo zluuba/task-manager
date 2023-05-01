@@ -55,7 +55,7 @@ class UserCreateView(CreateView):
     success_message = _('User is successfully registered')
     extra_context = {
         'title': _('Sign up'),
-        'button': _('Sign up'),
+        'button': _('Register'),
     }
 
 
