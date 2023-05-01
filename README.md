@@ -1,8 +1,12 @@
 # Task Manager
 
+[![Actions Status](https://github.com/zluuba/python-project-52/workflows/hexlet-check/badge.svg)](https://github.com/zluuba/python-project-52/actions)
+[![Project Check](https://github.com/zluuba/python-project-52/actions/workflows/project-check.yml/badge.svg)](https://github.com/zluuba/python-project-52/actions/workflows/project-check.yml)
+
+
 Not ready yet  ˙◠˙
 
-[//]: # ([![Actions Status]&#40;https://github.com/zluuba/python-project-52/workflows/hexlet-check/badge.svg&#41;]&#40;https://github.com/zluuba/python-project-52/actions&#41;)
+
 
 [//]: # ()
 [//]: # (Task Manager is a task management system &#40;similar to [Redmine]&#40;http://www.redmine.org/&#41;&#41;. )
