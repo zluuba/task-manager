@@ -1,7 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm, AuthenticationForm, UserChangeForm
+)
 from .models import User
-
-# from task_manager.utils import UserFormFields
 
 
 class UserCreateForm(UserCreationForm):

@@ -20,21 +20,21 @@ class UsersView(ListView):
     context_object_name = 'users'
     template_name = 'users/users.html'
     extra_context = {
-        'title': _('Users'),                                    # ru: "Пользователи"
-        'fields': ['ID', _('Username'), _('Full name'),         # ru: "Имя пользователя", "Полное имя"
-                   _('Created at'), ''],                        # ru: "Дата создания"
-        'edit_btn': _('Edit'),                                  # ru: "Изменить"
-        'delete_btn': _('Delete'),                              # ru: "Удалить"
+        'title': _('Users'),
+        'fields': ['ID', _('Username'), _('Full name'),
+                   _('Created at'), ''],
+        'edit_btn': _('Edit'),
+        'delete_btn': _('Delete'),
     }
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = LoginForm
     template_name = 'users/form.html'
-    success_message = _('You are logged in')                    # ru: "Вы залогинены"
+    success_message = _('You are logged in')
     extra_context = {
-        'title': _('Sign in'),                                  # ru: "Вход"
-        'button': _('Enter'),                                   # ru: "Войти"
+        'title': _('Sign in'),
+        'button': _('Enter'),
     }
 
     def get_success_url(self):
@@ -44,7 +44,7 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 class UserLogout(View):
     def get(self, request):
         logout(request)
-        messages.info(request, _('You are logged out'))         # ru msg: "Вы разлогинены"
+        messages.info(request, _('You are logged out'))
         return redirect('home')
 
 
@@ -52,10 +52,10 @@ class UserCreateView(CreateView):
     form_class = UserCreateForm
     template_name = 'users/form.html'
     success_url = reverse_lazy('login')
-    success_message = _('User is successfully registered')      # ru: "Пользователь успешно зарегистрирован"
+    success_message = _('User is successfully registered')
     extra_context = {
-        'title': _('Sign up'),                                  # ru: "Регистрация"
-        'button': _('Sign up'),                                 # ru: "Зарегистрировать"
+        'title': _('Sign up'),
+        'button': _('Sign up'),
     }
 
 
@@ -64,22 +64,24 @@ class UserUpdateView(UserPermissions, AuthorizationCheck, UpdateView):
     form_class = UserUpdateForm
     template_name = 'users/form.html'
     success_url = reverse_lazy('users')
-    success_message = _('User is successfully updated')         # ru: "Пользователь успешно изменён"
+    success_message = _('User is successfully updated')
     extra_context = {
-        'title': _('Update user'),                              # ru: "Изменить пользователя"
-        'button': _('Update'),                                  # ru: "Изменить"
+        'title': _('Update user'),
+        'button': _('Update'),
     }
 
 
-class UserDeleteView(UserPermissions, AuthorizationCheck, SuccessMessageMixin, DeleteView):
+class UserDeleteView(
+    UserPermissions, AuthorizationCheck, SuccessMessageMixin, DeleteView
+):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users')
-    success_message = _('User successfully deleted')            # ru: "Пользователь успешно удалён"
+    success_message = _('User successfully deleted')
     extra_context = {
-        'title': _('Delete user'),                              # ru: "Удалить пользователя"
-        'text': _('Are you sure you want to delete '),          # ru: "Вы уверены, что хотите удалить "
-        'button': _('Yes, delete'),                             # ru: "Да, удалить"
+        'title': _('Delete user'),
+        'text': _('Are you sure you want to delete '),
+        'button': _('Yes, delete'),
     }
 
     def form_valid(self, form):
@@ -87,7 +89,9 @@ class UserDeleteView(UserPermissions, AuthorizationCheck, SuccessMessageMixin, D
         user_tasks = Task.objects.filter(author=user_id)
 
         if user_tasks:
-            messages.error(self.request, 'Cannot delete a user because he is being used')
+            messages.error(
+                self.request, 'Cannot delete a user because he is being used'
+            )
             # ru: "Невозможно удалить пользователя, потому что он используется"
             return redirect('users')
         return super().form_valid(form)

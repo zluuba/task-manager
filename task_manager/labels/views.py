@@ -29,10 +29,10 @@ class LabelCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
     form_class = LabelForm
     template_name = 'labels/form.html'
     success_url = reverse_lazy('labels')
-    success_message = _('Label successfully created')      # ru: "Метка успешно создана"
+    success_message = _('Label successfully created')
     extra_context = {
-        'title': _('Create label'),                        # ru: "Создать метку"
-        'button': _('Create'),                              # ru: "Создать"
+        'title': _('Create label'),
+        'button': _('Create'),
     }
 
 
@@ -41,10 +41,10 @@ class LabelUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     form_class = LabelForm
     template_name = 'labels/form.html'
     success_url = reverse_lazy('labels')
-    success_message = _('Label is successfully updated')   # ru: "Метка успешно изменена"
+    success_message = _('Label is successfully updated')
     extra_context = {
-        'title': _('Update label'),                        # ru: "Изменить метку"
-        'button': _('Update'),                              # ru: "Изменить"
+        'title': _('Update label'),
+        'button': _('Update'),
     }
 
 
@@ -52,11 +52,11 @@ class LabelDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels')
-    success_message = _('Label successfully deleted')      # ru: "Метка успешно удалена"
+    success_message = _('Label successfully deleted')
     extra_context = {
-        'title': _('Delete label'),                        # ru: "Удаление метки"
-        'text': _('Are you sure you want to delete '),      # ru: "Вы уверены, что хотите удалить "
-        'button': _('Yes, delete'),                         # ru: "Да, удалить"
+        'title': _('Delete label'),
+        'text': _('Are you sure you want to delete '),
+        'button': _('Yes, delete'),
     }
 
     def post(self, request, *args, **kwargs):
@@ -68,7 +68,10 @@ class LabelDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
         if form.is_valid():
             if not tasks_with_label:
                 return self.form_valid(form)
-            messages.error(self.request, 'It is not possible to delete a label because it is in use')
+            messages.error(
+                self.request,
+                'It is not possible to delete a label because it is in use'
+            )
             # ru: "Невозможно удалить метку, потому что она используется"
             return redirect('labels')
         else:

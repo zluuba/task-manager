@@ -26,10 +26,10 @@ class StatusCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
     form_class = StatusForm
     template_name = 'statuses/form.html'
     success_url = reverse_lazy('statuses')
-    success_message = _('Status successfully created')      # ru: "Статус успешно создан"
+    success_message = _('Status successfully created')
     extra_context = {
-        'title': _('Create status'),                        # ru: "Создать статус"
-        'button': _('Create'),                              # ru: "Создать"
+        'title': _('Create status'),
+        'button': _('Create'),
     }
 
 
@@ -38,10 +38,10 @@ class StatusUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     form_class = StatusForm
     template_name = 'statuses/form.html'
     success_url = reverse_lazy('statuses')
-    success_message = _('Status is successfully updated')   # ru: "Статус успешно изменён"
+    success_message = _('Status is successfully updated')
     extra_context = {
-        'title': _('Update status'),                        # ru: "Изменить статус"
-        'button': _('Update'),                              # ru: "Изменить"
+        'title': _('Update status'),
+        'button': _('Update'),
     }
 
 
@@ -49,9 +49,9 @@ class StatusDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses')
-    success_message = _('Status successfully deleted')      # ru: "Статус успешно удалён"
+    success_message = _('Status successfully deleted')
     extra_context = {
-        'title': _('Delete status'),                        # ru: "Удаление статуса"
-        'text': _('Are you sure you want to delete '),      # ru: "Вы уверены, что хотите удалить "
-        'button': _('Yes, delete'),                         # ru: "Да, удалить"
+        'title': _('Delete status'),
+        'text': _('Are you sure you want to delete '),
+        'button': _('Yes, delete'),
     }

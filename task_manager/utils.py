@@ -31,7 +31,9 @@ class UserPermissions:
         chosen_user_id = kwargs['pk']
 
         if current_user != chosen_user_id:
-            messages.error(request, 'You have no rights to change another user.')
+            messages.error(
+                request, 'You have no rights to change another user.'
+            )
             # ru: "У вас нет прав для изменения другого пользователя."
             return redirect('users')
 
@@ -49,7 +51,9 @@ class TaskPermissions:
         curr_user = str(request.user)
 
         if curr_user != task_author:
-            messages.error(request, 'The task can be deleted only by its author')
+            messages.error(
+                request, 'The task can be deleted only by its author'
+            )
             # ru: "Задачу может удалить только её автор"
             return redirect('tasks')
 
