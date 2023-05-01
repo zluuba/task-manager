@@ -20,7 +20,7 @@ class Task(models.Model):
     )
     executor = models.ForeignKey(
         User, related_name='executor', verbose_name=_('Executor'),
-        null=True, blank=True, default=None, on_delete=models.PROTECT,
+        null=True, blank=True, default='', on_delete=models.PROTECT,
     )
     status = models.ForeignKey(
         Status, related_name='status', verbose_name=_('Status'),
