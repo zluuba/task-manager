@@ -16,6 +16,8 @@ jobs:
           pip install flake8
           make lint
       - name: Run tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
           pip install coverage
           make test
