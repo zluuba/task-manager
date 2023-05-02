@@ -51,14 +51,19 @@ class TaskPermissions:
     """
 
     def dispatch(self, request, *args, **kwargs):
-        task_author = str(Task.objects.get(pk=kwargs['pk']).author)
-        curr_user = str(User.objects.get(username=request.user).get_fullname())
+        try:
+            task_author = str(Task.objects.get(pk=kwargs['pk']).author)
+            curr_user = str(User.objects.get(username=request.user).get_fullname())
 
-        if curr_user != task_author:
-            messages.error(
-                request, _('The task can be deleted only by its author')
-            )
-            # ru: "Задачу может удалить только её автор"
-            return redirect('tasks')
+            if curr_user != task_author:
+                messages.error(
+                    request, _('The task can be deleted only by its author')
+                )
+                # ru: "Задачу может удалить только её автор"
+                return redirect('tasks')
 
-        return super().dispatch(request, *args, **kwargs)
+        except (Task.DoesNotExist, User.DoesNotExist):
+            pass
+
+        finally:
+            return super().dispatch(request, *args, **kwargs)
