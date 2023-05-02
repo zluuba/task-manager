@@ -17,6 +17,7 @@ jobs:
           make lint
       - name: Run tests
         run: |
+          pip install coverage
           make test
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
