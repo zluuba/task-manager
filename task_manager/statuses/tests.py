@@ -47,6 +47,7 @@ class StatusCreateTestCase(SetUpTestCase):
             {'name': 'new_status'}
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('statuses'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -63,6 +64,7 @@ class StatusCreateTestCase(SetUpTestCase):
 
         response = self.client.post(reverse_lazy('status_create'))
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -84,6 +86,7 @@ class StatusUpdateTestCase(SetUpTestCase):
             {'name': 'status_updated'}
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('statuses'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -103,6 +106,7 @@ class StatusUpdateTestCase(SetUpTestCase):
             'status_update', kwargs={'pk': 1}
         ))
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -123,6 +127,7 @@ class StatusDeleteTestCase(SetUpTestCase):
             reverse_lazy('status_delete', kwargs={'pk': 1})
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('statuses'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -134,14 +139,14 @@ class StatusDeleteTestCase(SetUpTestCase):
         with self.assertRaises(Status.DoesNotExist):
             Status.objects.get(pk=1)
 
-    def test_status_delete_fail_in_use(self):
+    def test_status_delete_fail_used_by_task(self):
         login = self.client.login(
             username='alice_wang', password='dfGt30jBY3',
         )
         self.assertTrue(login)
 
         with self.assertRaises(ProtectedError):
-            response = self.client.post(reverse_lazy(
+            self.client.post(reverse_lazy(
                 'status_delete', kwargs={'pk': 2}
             ))
 
@@ -153,6 +158,7 @@ class StatusDeleteTestCase(SetUpTestCase):
             'status_delete', kwargs={'pk': 1}
         ))
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -170,7 +176,9 @@ class StatusViewsTestCase(SetUpTestCase):
         self.assertTrue(login)
         response = self.client.get(reverse_lazy('statuses'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='statuses/statuses.html')
+        self.assertTemplateUsed(
+            response, template_name='statuses/statuses.html'
+        )
 
     def test_status_create_view(self):
         login = self.client.login(

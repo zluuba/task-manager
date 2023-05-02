@@ -41,6 +41,7 @@ class UserCreateTestCase(SetUpTestCase):
              'password2': 'gKlc89Cf1'}
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -57,6 +58,7 @@ class UserCreateTestCase(SetUpTestCase):
              'password2': 'dfGt30jBY3'}
         )
         self.assertEqual(response.status_code, 200)
+
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 0)
 
@@ -68,6 +70,7 @@ class UserCreateTestCase(SetUpTestCase):
              'password2': 'dfGt30jBY395'}
         )
         self.assertEqual(response.status_code, 200)
+
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 0)
 
@@ -98,6 +101,7 @@ class UserUpdateTestCase(SetUpTestCase):
              'password2': 'dfGt30jBY3'}
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('users'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -114,6 +118,7 @@ class UserUpdateTestCase(SetUpTestCase):
              'password2': 'dfGt30jBY3'}
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('users'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -134,6 +139,7 @@ class UserDeleteTestCase(SetUpTestCase):
             reverse_lazy('users_delete', kwargs={'pk': 1}),
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('users'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -150,6 +156,7 @@ class UserDeleteTestCase(SetUpTestCase):
             reverse_lazy('users_delete', kwargs={'pk': 1}),
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('users'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -176,6 +183,8 @@ class UserLoginTestCase(SetUpTestCase):
             {"username": "alice_wang", "password": "dfGt30jBY3"},
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('home'))
+
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), ['You are logged in', 'Вы залогинены'])

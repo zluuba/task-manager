@@ -36,6 +36,7 @@ class LabelCreateTestCase(SetUpTestCase):
             {'name': 'new_label'}
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('labels'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -53,6 +54,7 @@ class LabelCreateTestCase(SetUpTestCase):
 
         response = self.client.post(reverse_lazy('label_create'))
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -74,6 +76,7 @@ class LabelUpdateTestCase(SetUpTestCase):
             {'name': 'label_updated'}
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('labels'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -93,6 +96,7 @@ class LabelUpdateTestCase(SetUpTestCase):
             'label_update', kwargs={'pk': 1}
         ))
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -113,6 +117,7 @@ class LabelDeleteTestCase(SetUpTestCase):
             reverse_lazy('label_delete', kwargs={'pk': 1})
         )
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('labels'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -132,6 +137,7 @@ class LabelDeleteTestCase(SetUpTestCase):
             'label_delete', kwargs={'pk': 1}
         ))
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
