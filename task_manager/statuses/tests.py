@@ -34,14 +34,13 @@ class SetUpTestCase(TestCase):
         )
         self.task.save()
 
+        self.client.login(
+            username='alice_wang', password='dfGt30jBY3',
+        )
+
 
 class StatusCreateTestCase(SetUpTestCase):
     def test_status_create_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('status_create'),
             {'name': 'new_status'}
@@ -59,8 +58,7 @@ class StatusCreateTestCase(SetUpTestCase):
         self.assertIsNotNone(new_status)
 
     def test_status_create_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy('status_create'))
         self.assertEqual(response.status_code, 302)
@@ -76,11 +74,6 @@ class StatusCreateTestCase(SetUpTestCase):
 
 class StatusUpdateTestCase(SetUpTestCase):
     def test_status_update_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('status_update', kwargs={'pk': 1}),
             {'name': 'status_updated'}
@@ -99,8 +92,7 @@ class StatusUpdateTestCase(SetUpTestCase):
         self.assertIsNotNone(updated_status)
 
     def test_status_update_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy(
             'status_update', kwargs={'pk': 1}
@@ -118,11 +110,6 @@ class StatusUpdateTestCase(SetUpTestCase):
 
 class StatusDeleteTestCase(SetUpTestCase):
     def test_status_delete_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('status_delete', kwargs={'pk': 1})
         )
@@ -140,19 +127,13 @@ class StatusDeleteTestCase(SetUpTestCase):
             Status.objects.get(pk=1)
 
     def test_status_delete_fail_used_by_task(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         with self.assertRaises(ProtectedError):
             self.client.post(reverse_lazy(
                 'status_delete', kwargs={'pk': 2}
             ))
 
     def test_status_delete_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy(
             'status_delete', kwargs={'pk': 1}
@@ -170,10 +151,6 @@ class StatusDeleteTestCase(SetUpTestCase):
 
 class StatusViewsTestCase(SetUpTestCase):
     def test_statuses_list_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy('statuses'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
@@ -181,19 +158,11 @@ class StatusViewsTestCase(SetUpTestCase):
         )
 
     def test_status_create_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy('status_create'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='statuses/form.html')
 
     def test_status_update_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy(
             'status_update', kwargs={'pk': 1}
         ))
@@ -201,10 +170,6 @@ class StatusViewsTestCase(SetUpTestCase):
         self.assertTemplateUsed(response, template_name='statuses/form.html')
 
     def test_status_delete_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy(
             'status_delete', kwargs={'pk': 1}
         ))

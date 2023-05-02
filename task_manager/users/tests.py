@@ -20,6 +20,10 @@ class SetUpTestCase(TestCase):
         self.user.set_password('dfGt30jBY3')
         self.user.save()
 
+        self.client.login(
+            username='alice_wang', password='dfGt30jBY3',
+        )
+
 
 class UserCreateTestCase(SetUpTestCase):
     def test_user_creation(self):
@@ -89,11 +93,6 @@ class UserCreateTestCase(SetUpTestCase):
 
 class UserUpdateTestCase(SetUpTestCase):
     def test_user_update_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('users_update', kwargs={'pk': 1}),
             {'first_name': 'Alice', 'last_name': 'Wang',
@@ -111,6 +110,8 @@ class UserUpdateTestCase(SetUpTestCase):
         ])
 
     def test_user_update_no_permission(self):
+        self.client.logout()
+
         response = self.client.post(
             reverse_lazy('users_update', kwargs={'pk': 1}),
             {'first_name': 'Alice', 'last_name': 'Wang',
@@ -130,11 +131,6 @@ class UserUpdateTestCase(SetUpTestCase):
 
 class UserDeleteTestCase(SetUpTestCase):
     def test_user_delete_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('users_delete', kwargs={'pk': 1}),
         )
@@ -149,8 +145,7 @@ class UserDeleteTestCase(SetUpTestCase):
         ])
 
     def test_user_delete_no_permission(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(
             reverse_lazy('users_delete', kwargs={'pk': 1}),
@@ -168,11 +163,6 @@ class UserDeleteTestCase(SetUpTestCase):
 
 class UserLoginTestCase(SetUpTestCase):
     def test_user_login(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         incorrect_login = self.client.login(
             username='incorrect_username', password='incorrect_password',
         )
@@ -209,11 +199,11 @@ class UserViewsTestCase(SetUpTestCase):
     def test_user_update_view(self):
         response = self.client.get(reverse_lazy('users_update',
                                                 kwargs={'pk': 1}))
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('users'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='users/form.html')
 
     def test_user_delete_view(self):
         response = self.client.get(reverse_lazy('users_delete',
                                                 kwargs={'pk': 1}))
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('users'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='users/delete.html')

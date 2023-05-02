@@ -47,14 +47,13 @@ class SetUpTestCase(TestCase):
         )
         self.alice_task.save()
 
+        self.client.login(
+            username='alice_wang', password='dfGt30jBY3',
+        )
+
 
 class TaskCreateTestCase(SetUpTestCase):
     def test_task_create_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('task_create'),
             {'name': 'new_task', 'description': 'new_task description',
@@ -74,8 +73,7 @@ class TaskCreateTestCase(SetUpTestCase):
         self.assertIsNotNone(new_task)
 
     def test_task_create_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy('task_create'))
         self.assertEqual(response.status_code, 302)
@@ -91,11 +89,6 @@ class TaskCreateTestCase(SetUpTestCase):
 
 class TaskUpdateTestCase(SetUpTestCase):
     def test_task_update_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('task_update', kwargs={'pk': 1}),
             {'name': 'task_updated', 'description': 'new_task description',
@@ -115,8 +108,7 @@ class TaskUpdateTestCase(SetUpTestCase):
         self.assertIsNotNone(updated_task)
 
     def test_task_update_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy(
             'task_update', kwargs={'pk': 1}
@@ -134,13 +126,8 @@ class TaskUpdateTestCase(SetUpTestCase):
 
 class TaskDeleteTestCase(SetUpTestCase):
     def test_task_delete_success(self):
-        login = self.client.login(
-            username='bob_brown', password='hk70XhHG0D',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
-            reverse_lazy('task_delete', kwargs={'pk': 1})
+            reverse_lazy('task_delete', kwargs={'pk': 2})
         )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('tasks'))
@@ -153,14 +140,9 @@ class TaskDeleteTestCase(SetUpTestCase):
         ])
 
         with self.assertRaises(Task.DoesNotExist):
-            Task.objects.get(pk=1)
+            Task.objects.get(pk=2)
 
     def test_task_delete_fail_user_not_author(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('task_delete', kwargs={'pk': 1})
         )
@@ -175,8 +157,7 @@ class TaskDeleteTestCase(SetUpTestCase):
         ])
 
     def test_task_delete_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy(
             'task_delete', kwargs={'pk': 1}
@@ -193,28 +174,16 @@ class TaskDeleteTestCase(SetUpTestCase):
 
 class TaskViewsTestCase(SetUpTestCase):
     def test_tasks_list_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy('tasks'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='tasks/tasks.html')
 
     def test_task_create_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy('task_create'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='tasks/form.html')
 
     def test_task_update_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy(
             'task_update', kwargs={'pk': 1}
         ))
@@ -222,10 +191,6 @@ class TaskViewsTestCase(SetUpTestCase):
         self.assertTemplateUsed(response, template_name='tasks/form.html')
 
     def test_task_delete_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy(
             'task_delete', kwargs={'pk': 1}
         ))

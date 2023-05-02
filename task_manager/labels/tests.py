@@ -23,14 +23,13 @@ class SetUpTestCase(TestCase):
         self.label = Label.objects.create(name='label')
         self.label.save()
 
+        self.client.login(
+            username='alice_wang', password='dfGt30jBY3',
+        )
+
 
 class LabelCreateTestCase(SetUpTestCase):
     def test_label_create_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('label_create'),
             {'name': 'new_label'}
@@ -49,8 +48,7 @@ class LabelCreateTestCase(SetUpTestCase):
         self.assertIsNotNone(new_label)
 
     def test_label_create_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy('label_create'))
         self.assertEqual(response.status_code, 302)
@@ -66,11 +64,6 @@ class LabelCreateTestCase(SetUpTestCase):
 
 class LabelUpdateTestCase(SetUpTestCase):
     def test_label_update_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('label_update', kwargs={'pk': 1}),
             {'name': 'label_updated'}
@@ -89,8 +82,7 @@ class LabelUpdateTestCase(SetUpTestCase):
         self.assertIsNotNone(updated_label)
 
     def test_label_update_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy(
             'label_update', kwargs={'pk': 1}
@@ -108,11 +100,6 @@ class LabelUpdateTestCase(SetUpTestCase):
 
 class LabelDeleteTestCase(SetUpTestCase):
     def test_label_delete_success(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
-
         response = self.client.post(
             reverse_lazy('label_delete', kwargs={'pk': 1})
         )
@@ -130,8 +117,7 @@ class LabelDeleteTestCase(SetUpTestCase):
             Label.objects.get(pk=1)
 
     def test_label_delete_fail_not_logged_in(self):
-        login = self.client.login()
-        self.assertFalse(login)
+        self.client.logout()
 
         response = self.client.post(reverse_lazy(
             'label_delete', kwargs={'pk': 1}
@@ -149,28 +135,16 @@ class LabelDeleteTestCase(SetUpTestCase):
 
 class LabelViewsTestCase(SetUpTestCase):
     def test_labels_list_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy('labels'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='labels/labels.html')
 
     def test_label_create_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy('label_create'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='labels/form.html')
 
     def test_label_update_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy(
             'label_update', kwargs={'pk': 1}
         ))
@@ -178,10 +152,6 @@ class LabelViewsTestCase(SetUpTestCase):
         self.assertTemplateUsed(response, template_name='labels/form.html')
 
     def test_label_delete_view(self):
-        login = self.client.login(
-            username='alice_wang', password='dfGt30jBY3',
-        )
-        self.assertTrue(login)
         response = self.client.get(reverse_lazy(
             'label_delete', kwargs={'pk': 1}
         ))
