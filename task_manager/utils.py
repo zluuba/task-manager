@@ -18,7 +18,6 @@ class AuthorizationCheck(LoginRequiredMixin):
             messages.error(
                 request, _('You are not logged in! Please log in.')
             )
-            # ru: "Вы не авторизованы! Пожалуйста, выполните вход."
             return redirect('login')
         return super().dispatch(request, *args, **kwargs)
 
@@ -38,7 +37,6 @@ class UserPermissions:
             messages.error(
                 request, _('You have no rights to change another user.')
             )
-            # ru: "У вас нет прав для изменения другого пользователя."
             return redirect('users')
 
         return super().dispatch(request, *args, **kwargs)
@@ -53,13 +51,14 @@ class TaskPermissions:
     def dispatch(self, request, *args, **kwargs):
         try:
             task_author = str(Task.objects.get(pk=kwargs['pk']).author)
-            curr_user = str(User.objects.get(username=request.user).get_fullname())
+            curr_user = str(
+                User.objects.get(username=request.user).get_fullname()
+            )
 
             if curr_user != task_author:
                 messages.error(
                     request, _('The task can be deleted only by its author')
                 )
-                # ru: "Задачу может удалить только её автор"
                 return redirect('tasks')
 
         except (Task.DoesNotExist, User.DoesNotExist):
