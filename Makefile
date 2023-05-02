@@ -16,4 +16,4 @@ test:
 
 test-coverage:
 	poetry run coverage run manage.py test
-	coverage report
+	poetry run coverage xml --include=task_manager/* --omit=task_manager/settings.py
