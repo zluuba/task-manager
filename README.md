@@ -6,25 +6,70 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/69e4fd04562de82f7d48/test_coverage)](https://codeclimate.com/github/zluuba/python-project-52/test_coverage)
 
 
-Almost ready  ˙◡˙
+Task Manager is a task management system. <br>
+Plan, organize, and collaborate on any project with task management that will fit every need.
+Task Manager can **set tasks** change their **statuses** and **assign responsibility**. <br>
+**Log in** or **register** to take advantage of all the features.
+
+[Web version link](https://railway.app/) <br>
+It's hosted on Railway. If link above doesn't work, you can run the app locally.
+Check the description below.
 
 
-[//]: # ()
-[//]: # (Task Manager is a task management system &#40;similar to [Redmine]&#40;http://www.redmine.org/&#41;&#41;. )
+**gif section**
 
-[//]: # (It allows you to set **tasks**, **assign performers** and **change their statuses**. )
+**see more demos link**
 
-[//]: # (**Registration** and **authentication** are required to work with the system.)
 
-[//]: # ()
-[//]: # ()
-[//]: # (### Requirements)
+### Requirements
 
-[//]: # ()
-[//]: # (- [python]&#40;https://www.python.org/&#41;, version 3.9 or higher)
+- [python](https://www.python.org/), version 3.9 or higher
+- [poetry](https://python-poetry.org/docs/#installation), version 1.0.0 or higher
 
-[//]: # (- [poetry]&#40;https://python-poetry.org/docs/#installation&#41;, version 1.0.0 or higher)
 
-[//]: # ()
-[//]: # ()
-[//]: # (by [**zluuba**]&#40;https://github.com/zluuba&#41;)
+### Installation
+
+Clone this repo or download it with pip:
+```ch
+git clone https://github.com/zluuba/task-manager.git
+```
+```ch
+pip install --user git+https://github.com/zluuba/task-manager.git
+```
+
+Go to the downloaded dir and install dependencies:
+```ch
+cd task-manager
+make install
+```
+
+### Create .env file
+
+```ch
+nano .env
+```
+Write down the following environment variables (paste your data):
+```ch
+SECRET_KEY = 'AnySecretKey'
+ACCESS_TOKEN = 'AnyCharactersForAccessToken'
+```
+
+### After all package ready to go
+Run WSGI server and follow the [link you will see](http://0.0.0.0:8000):
+```ch
+make start
+```
+You can run the app locally:
+```ch
+make dev
+```
+
+### Demos
+
+#### Package setup
+
+
+#### Usage
+
+
+**by [zluuba](https://github.com/zluuba)**
