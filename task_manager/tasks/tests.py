@@ -53,6 +53,16 @@ class SetUpTestCase(TestCase):
 
 
 class TaskCreateTestCase(SetUpTestCase):
+    def test_tasks_list_view(self):
+        response = self.client.get(reverse_lazy('tasks'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='tasks/tasks.html')
+
+    def test_task_create_view(self):
+        response = self.client.get(reverse_lazy('task_create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
     def test_task_create_success(self):
         response = self.client.post(
             reverse_lazy('task_create'),
@@ -88,6 +98,26 @@ class TaskCreateTestCase(SetUpTestCase):
 
 
 class TaskUpdateTestCase(SetUpTestCase):
+    def test_task_view(self):
+        response = self.client.get(reverse_lazy(
+            'task', kwargs={'pk': 1}
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='tasks/task.html')
+
+        task = Task.objects.get(pk=1)
+        self.assertContains(response, task.name)
+        self.assertContains(response, task.description)
+        self.assertContains(response, task.status)
+        self.assertContains(response, task.executor)
+
+    def test_task_update_view(self):
+        response = self.client.get(reverse_lazy(
+            'task_update', kwargs={'pk': 1}
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
     def test_task_update_success(self):
         response = self.client.post(
             reverse_lazy('task_update', kwargs={'pk': 1}),
@@ -125,6 +155,13 @@ class TaskUpdateTestCase(SetUpTestCase):
 
 
 class TaskDeleteTestCase(SetUpTestCase):
+    def test_task_delete_view(self):
+        response = self.client.get(reverse_lazy(
+            'task_delete', kwargs={'pk': 1}
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='tasks/delete.html')
+
     def test_task_delete_success(self):
         response = self.client.post(
             reverse_lazy('task_delete', kwargs={'pk': 2})
@@ -156,6 +193,12 @@ class TaskDeleteTestCase(SetUpTestCase):
             'Задачу может удалить только её автор',
         ])
 
+    def test_task_delete_fail_task_not_exist(self):
+        response = self.client.post(
+            reverse_lazy('task_delete', kwargs={'pk': 42})
+        )
+        self.assertEqual(response.status_code, 404)
+
     def test_task_delete_fail_not_logged_in(self):
         self.client.logout()
 
@@ -170,29 +213,3 @@ class TaskDeleteTestCase(SetUpTestCase):
             'You are not logged in! Please log in.',
             'Вы не авторизованы! Пожалуйста, выполните вход.',
         ])
-
-
-class TaskViewsTestCase(SetUpTestCase):
-    def test_tasks_list_view(self):
-        response = self.client.get(reverse_lazy('tasks'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='tasks/tasks.html')
-
-    def test_task_create_view(self):
-        response = self.client.get(reverse_lazy('task_create'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='tasks/form.html')
-
-    def test_task_update_view(self):
-        response = self.client.get(reverse_lazy(
-            'task_update', kwargs={'pk': 1}
-        ))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='tasks/form.html')
-
-    def test_task_delete_view(self):
-        response = self.client.get(reverse_lazy(
-            'task_delete', kwargs={'pk': 1}
-        ))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='tasks/delete.html')

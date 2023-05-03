@@ -40,6 +40,18 @@ class SetUpTestCase(TestCase):
 
 
 class StatusCreateTestCase(SetUpTestCase):
+    def test_statuses_list_view(self):
+        response = self.client.get(reverse_lazy('statuses'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, template_name='statuses/statuses.html'
+        )
+
+    def test_status_create_view(self):
+        response = self.client.get(reverse_lazy('status_create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
     def test_status_create_success(self):
         response = self.client.post(
             reverse_lazy('status_create'),
@@ -73,6 +85,13 @@ class StatusCreateTestCase(SetUpTestCase):
 
 
 class StatusUpdateTestCase(SetUpTestCase):
+    def test_status_update_view(self):
+        response = self.client.get(reverse_lazy(
+            'status_update', kwargs={'pk': 1}
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
     def test_status_update_success(self):
         response = self.client.post(
             reverse_lazy('status_update', kwargs={'pk': 1}),
@@ -109,6 +128,13 @@ class StatusUpdateTestCase(SetUpTestCase):
 
 
 class StatusDeleteTestCase(SetUpTestCase):
+    def test_status_delete_view(self):
+        response = self.client.get(reverse_lazy(
+            'status_delete', kwargs={'pk': 1}
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='statuses/delete.html')
+
     def test_status_delete_success(self):
         response = self.client.post(
             reverse_lazy('status_delete', kwargs={'pk': 1})
@@ -147,31 +173,3 @@ class StatusDeleteTestCase(SetUpTestCase):
             'You are not logged in! Please log in.',
             'Вы не авторизованы! Пожалуйста, выполните вход.',
         ])
-
-
-class StatusViewsTestCase(SetUpTestCase):
-    def test_statuses_list_view(self):
-        response = self.client.get(reverse_lazy('statuses'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, template_name='statuses/statuses.html'
-        )
-
-    def test_status_create_view(self):
-        response = self.client.get(reverse_lazy('status_create'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='statuses/form.html')
-
-    def test_status_update_view(self):
-        response = self.client.get(reverse_lazy(
-            'status_update', kwargs={'pk': 1}
-        ))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='statuses/form.html')
-
-    def test_status_delete_view(self):
-        response = self.client.get(reverse_lazy(
-            'status_delete', kwargs={'pk': 1}
-        ))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='statuses/delete.html')

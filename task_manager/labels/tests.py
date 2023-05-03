@@ -29,6 +29,16 @@ class SetUpTestCase(TestCase):
 
 
 class LabelCreateTestCase(SetUpTestCase):
+    def test_labels_list_view(self):
+        response = self.client.get(reverse_lazy('labels'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='labels/labels.html')
+
+    def test_label_create_view(self):
+        response = self.client.get(reverse_lazy('label_create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
     def test_label_create_success(self):
         response = self.client.post(
             reverse_lazy('label_create'),
@@ -63,6 +73,13 @@ class LabelCreateTestCase(SetUpTestCase):
 
 
 class LabelUpdateTestCase(SetUpTestCase):
+    def test_label_update_view(self):
+        response = self.client.get(reverse_lazy(
+            'label_update', kwargs={'pk': 1}
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
     def test_label_update_success(self):
         response = self.client.post(
             reverse_lazy('label_update', kwargs={'pk': 1}),
@@ -99,6 +116,13 @@ class LabelUpdateTestCase(SetUpTestCase):
 
 
 class LabelDeleteTestCase(SetUpTestCase):
+    def test_label_delete_view(self):
+        response = self.client.get(reverse_lazy(
+            'label_delete', kwargs={'pk': 1}
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='labels/delete.html')
+
     def test_label_delete_success(self):
         response = self.client.post(
             reverse_lazy('label_delete', kwargs={'pk': 1})
@@ -131,29 +155,3 @@ class LabelDeleteTestCase(SetUpTestCase):
             'You are not logged in! Please log in.',
             'Вы не авторизованы! Пожалуйста, выполните вход.',
         ])
-
-
-class LabelViewsTestCase(SetUpTestCase):
-    def test_labels_list_view(self):
-        response = self.client.get(reverse_lazy('labels'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='labels/labels.html')
-
-    def test_label_create_view(self):
-        response = self.client.get(reverse_lazy('label_create'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='labels/form.html')
-
-    def test_label_update_view(self):
-        response = self.client.get(reverse_lazy(
-            'label_update', kwargs={'pk': 1}
-        ))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='labels/form.html')
-
-    def test_label_delete_view(self):
-        response = self.client.get(reverse_lazy(
-            'label_delete', kwargs={'pk': 1}
-        ))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='labels/delete.html')

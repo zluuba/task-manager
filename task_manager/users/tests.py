@@ -92,6 +92,12 @@ class UserCreateTestCase(SetUpTestCase):
 
 
 class UserUpdateTestCase(SetUpTestCase):
+    def test_user_update_view(self):
+        response = self.client.get(reverse_lazy('users_update',
+                                                kwargs={'pk': 1}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
     def test_user_update_success(self):
         response = self.client.post(
             reverse_lazy('users_update', kwargs={'pk': 1}),
@@ -130,6 +136,12 @@ class UserUpdateTestCase(SetUpTestCase):
 
 
 class UserDeleteTestCase(SetUpTestCase):
+    def test_user_delete_view(self):
+        response = self.client.get(reverse_lazy('users_delete',
+                                                kwargs={'pk': 1}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='users/delete.html')
+
     def test_user_delete_success(self):
         response = self.client.post(
             reverse_lazy('users_delete', kwargs={'pk': 1}),
@@ -162,7 +174,12 @@ class UserDeleteTestCase(SetUpTestCase):
 
 
 class UserLoginTestCase(SetUpTestCase):
-    def test_user_login(self):
+    def test_user_login_view(self):
+        response = self.client.get(reverse_lazy('login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='form.html')
+
+    def test_user_login_post(self):
         incorrect_login = self.client.login(
             username='incorrect_username', password='incorrect_password',
         )
@@ -180,30 +197,34 @@ class UserLoginTestCase(SetUpTestCase):
         self.assertIn(str(messages[0]), ['You are logged in', 'Вы залогинены'])
 
 
-class UserViewsTestCase(SetUpTestCase):
-    def test_user_login_view(self):
-        response = self.client.get(reverse_lazy('login'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='users/form.html')
-
-    def test_users_list_view(self):
+class UsersListViewTestCase(SetUpTestCase):
+    def test_users_list_view_not_login(self):
+        self.client.logout()
         response = self.client.get(reverse_lazy('users'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='users/users.html')
 
-    def test_user_create_view(self):
-        response = self.client.get(reverse_lazy('users_create'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='users/form.html')
+        curr_language = response.context['LANGUAGE_CODE']
+        if curr_language == 'en-us':
+            self.assertNotContains(response, 'Statuses')
+            self.assertNotContains(response, 'Labels')
+            self.assertNotContains(response, 'Tasks')
+        else:
+            self.assertNotContains(response, 'Статусы')
+            self.assertNotContains(response, 'Метки')
+            self.assertNotContains(response, 'Задачи')
 
-    def test_user_update_view(self):
-        response = self.client.get(reverse_lazy('users_update',
-                                                kwargs={'pk': 1}))
+    def test_users_list_view_login(self):
+        response = self.client.get(reverse_lazy('users'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='users/form.html')
+        self.assertTemplateUsed(response, template_name='users/users.html')
 
-    def test_user_delete_view(self):
-        response = self.client.get(reverse_lazy('users_delete',
-                                                kwargs={'pk': 1}))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='users/delete.html')
+        curr_language = response.context['LANGUAGE_CODE']
+        if curr_language == 'en-us':
+            self.assertContains(response, 'Statuses')
+            self.assertContains(response, 'Labels')
+            self.assertContains(response, 'Tasks')
+        else:
+            self.assertContains(response, 'Статусы')
+            self.assertContains(response, 'Метки')
+            self.assertContains(response, 'Задачи')
