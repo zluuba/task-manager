@@ -30,7 +30,7 @@ class UsersView(ListView):
 
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = LoginForm
-    template_name = 'users/form.html'
+    template_name = 'form.html'
     success_message = _('You are logged in')
     extra_context = {
         'title': _('Sign in'),
@@ -50,7 +50,7 @@ class UserLogout(View):
 
 class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = UserCreateForm
-    template_name = 'users/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('login')
     success_message = _('User is successfully registered')
     extra_context = {
@@ -64,7 +64,7 @@ class UserUpdateView(
 ):
     model = User
     form_class = UserUpdateForm
-    template_name = 'users/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('users')
     success_message = _('User is successfully updated')
     extra_context = {
@@ -94,6 +94,5 @@ class UserDeleteView(
             messages.error(
                 self.request, _('Cannot delete a user because he is being used')
             )
-            # ru: "Невозможно удалить пользователя, потому что он используется"
             return redirect('users')
         return super().form_valid(form)

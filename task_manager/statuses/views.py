@@ -27,7 +27,7 @@ class StatusesView(AuthorizationCheck, ListView):
 
 class StatusCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
     form_class = StatusForm
-    template_name = 'statuses/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('statuses')
     success_message = _('Status successfully created')
     extra_context = {
@@ -39,7 +39,7 @@ class StatusCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
 class StatusUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
-    template_name = 'statuses/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('statuses')
     success_message = _('Status is successfully updated')
     extra_context = {
@@ -72,7 +72,6 @@ class StatusDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
                 self.request,
                 _('It is not possible to delete a status because it is in use')
             )
-            # ru: "Невозможно удалить статус, потому что он используется"
             return redirect('labels')
         else:
             return self.form_invalid(form)

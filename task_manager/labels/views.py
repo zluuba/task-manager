@@ -27,7 +27,7 @@ class LabelsView(AuthorizationCheck, ListView):
 
 class LabelCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
     form_class = LabelForm
-    template_name = 'labels/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('labels')
     success_message = _('Label successfully created')
     extra_context = {
@@ -39,7 +39,7 @@ class LabelCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
 class LabelUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelForm
-    template_name = 'labels/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('labels')
     success_message = _('Label is successfully updated')
     extra_context = {
@@ -72,7 +72,6 @@ class LabelDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
                 self.request,
                 _('It is not possible to delete a label because it is in use')
             )
-            # ru: "Невозможно удалить метку, потому что она используется"
             return redirect('labels')
         else:
             return self.form_invalid(form)

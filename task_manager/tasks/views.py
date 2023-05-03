@@ -42,7 +42,7 @@ class TaskView(AuthorizationCheck, DetailView):
 
 class TaskCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
     form_class = TaskForm
-    template_name = 'tasks/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully created')
     extra_context = {
@@ -59,7 +59,7 @@ class TaskCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
 class TaskUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     model = Task
     form_class = TaskForm
-    template_name = 'tasks/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('tasks')
     success_message = _('Task is successfully updated')
     extra_context = {
