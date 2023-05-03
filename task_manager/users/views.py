@@ -60,7 +60,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
 
 class UserUpdateView(
-    UserPermissions, AuthorizationCheck, SuccessMessageMixin, UpdateView
+    AuthorizationCheck, UserPermissions, SuccessMessageMixin, UpdateView
 ):
     model = User
     form_class = UserUpdateForm
@@ -74,7 +74,7 @@ class UserUpdateView(
 
 
 class UserDeleteView(
-    UserPermissions, AuthorizationCheck, SuccessMessageMixin, DeleteView
+    AuthorizationCheck, UserPermissions, SuccessMessageMixin, DeleteView
 ):
     model = User
     template_name = 'users/delete.html'

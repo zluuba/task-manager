@@ -117,10 +117,8 @@ class UserUpdateTestCase(SetUpTestCase):
         ])
 
     def test_user_update_no_permission(self):
-        self.client.logout()
-
         response = self.client.post(
-            reverse_lazy('users_update', kwargs={'pk': 1}),
+            reverse_lazy('users_update', kwargs={'pk': 2}),
             {'first_name': 'Alice', 'last_name': 'Wang',
              'username': 'alice_wang_update', 'password1': 'dfGt30jBY3',
              'password2': 'dfGt30jBY3'}
@@ -133,6 +131,22 @@ class UserUpdateTestCase(SetUpTestCase):
         self.assertIn(str(messages[0]), [
             'You have no rights to change another user.',
             'У вас нет прав для изменения другого пользователя.',
+        ])
+
+    def test_user_update_no_login(self):
+        self.client.logout()
+
+        response = self.client.get(
+            reverse_lazy('users_update', kwargs={'pk': 1}),
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertIn(str(messages[0]), [
+            'Вы не авторизованы! Пожалуйста, выполните вход.',
+            'You are not logged in! Please log in.',
         ])
 
 
@@ -158,10 +172,8 @@ class UserDeleteTestCase(SetUpTestCase):
         ])
 
     def test_user_delete_no_permission(self):
-        self.client.logout()
-
         response = self.client.post(
-            reverse_lazy('users_delete', kwargs={'pk': 1}),
+            reverse_lazy('users_delete', kwargs={'pk': 2}),
         )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('users'))
@@ -171,6 +183,22 @@ class UserDeleteTestCase(SetUpTestCase):
         self.assertIn(str(messages[0]), [
             'You have no rights to change another user.',
             'У вас нет прав для изменения другого пользователя.',
+        ])
+
+    def test_user_delete_no_login(self):
+        self.client.logout()
+
+        response = self.client.get(
+            reverse_lazy('users_delete', kwargs={'pk': 2}),
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertIn(str(messages[0]), [
+            'Вы не авторизованы! Пожалуйста, выполните вход.',
+            'You are not logged in! Please log in.',
         ])
 
 

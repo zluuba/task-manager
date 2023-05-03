@@ -1,6 +1,6 @@
 from pathlib import Path
 from dotenv import load_dotenv
-# import dj_database_url
+import dj_database_url
 import os
 
 
@@ -76,27 +76,16 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.railway.app'
 ]
 
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         "default": dj_database_url.config(
-#             default=DATABASE_URL,
-#             conn_max_age=1800
-#         ),
-#     }
+
+if not os.getenv('RAILWAY'):
+    DATABASE_URL = 'postgresql://<postgresql>'
+else:
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
