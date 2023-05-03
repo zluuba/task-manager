@@ -69,6 +69,7 @@ class LabelDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
         if form.is_valid():
             if not tasks_with_label:
                 return self.form_valid(form)
+
             messages.error(
                 self.request,
                 _('It is not possible to delete a label because it is in use')

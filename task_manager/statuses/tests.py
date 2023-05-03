@@ -1,4 +1,3 @@
-from django.db.models.deletion import ProtectedError
 from django.test import TestCase, modify_settings
 from django.contrib.messages import get_messages
 from django.urls import reverse_lazy
@@ -154,10 +153,18 @@ class StatusDeleteTestCase(SetUpTestCase):
             Status.objects.get(pk=1)
 
     def test_status_delete_fail_used_by_task(self):
-        with self.assertRaises(ProtectedError):
-            self.client.post(reverse_lazy(
-                'status_delete', kwargs={'pk': 2}
-            ))
+        response = self.client.post(
+            reverse_lazy('status_delete', kwargs={'pk': 2})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('statuses'))
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertIn(str(messages[0]), [
+            'It is not possible to delete a status because it is in use',
+            'Невозможно удалить статус, потому что он используется',
+        ])
 
     def test_status_delete_fail_not_logged_in(self):
         self.client.logout()

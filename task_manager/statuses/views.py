@@ -60,18 +60,19 @@ class StatusDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
     }
 
     def post(self, request, *args, **kwargs):
-        label_id = kwargs['pk']
-        tasks_with_label = Task.objects.filter(labels=label_id)
+        status_id = kwargs['pk']
+        tasks_with_status = Task.objects.filter(status=status_id)
 
         self.object = self.get_object()
         form = self.get_form()
 
         if form.is_valid():
-            if not tasks_with_label:
+            if not tasks_with_status:
                 return self.form_valid(form)
+
             messages.error(
                 self.request,
                 _('It is not possible to delete a status because it is in use')
             )
-            return redirect('labels')
+            return redirect('statuses')
         return self.form_invalid(form)
