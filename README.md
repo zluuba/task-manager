@@ -6,19 +6,18 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/69e4fd04562de82f7d48/test_coverage)](https://codeclimate.com/github/zluuba/python-project-52/test_coverage)
 
 
-This is a task management system. <br>
 Plan, organize, and collaborate on any project with task management that will fit every need. <br>
 Task Manager can **set tasks**, change their **statuses** and **assign responsibility**. <br>
 **Log in** or **register** to take advantage of all the features.
 
-It's [hosted on Railway](https://railway.app/). If link doesn't work, you can run the app locally.
+It's [hosted on Railway](https://task-manager-production-70cb.up.railway.app/). If link doesn't work, you can run the app locally.
 Check the description below.
 
 
 ![Task-manager](https://user-images.githubusercontent.com/87614163/235889951-af73f69f-479f-4663-a55a-4ef839f13355.gif)
 
 
-[See more demos](https://github.com/zluuba/python-project-52#demos)
+[See more demos](https://github.com/zluuba/task-manager#demos)
 
 
 
@@ -63,7 +62,6 @@ Or you can use django development server:
 ```ch
 make dev
 ```
-
 If you choose development server, you can also enable bedug messages by writing the following line in the .env file:
 "**DEBUG = True**"
 
