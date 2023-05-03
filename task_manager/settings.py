@@ -13,8 +13,9 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 ROLLBAR_ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 
-DEBUG = os.getenv('DEBUG')
-DEBUG = True if DEBUG else False
+DEBUG = os.getenv('DEBUG', False)
+
+RAILWAY_ON = os.getenv('RAILWAY', False)
 
 
 ALLOWED_HOSTS = [
@@ -76,14 +77,19 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.railway.app'
 ]
 
-
-if not os.getenv('RAILWAY'):
-    DATABASE_URL = 'postgresql://<postgresql>'
+if RAILWAY_ON:
+    DATABASE = dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=1800
+        )
 else:
-    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+    DATABASE = {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
 
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL)
+    'default': DATABASE,
 }
 
 
