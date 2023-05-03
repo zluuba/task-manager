@@ -3,6 +3,8 @@ from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.contrib import messages
 
+from django.http import Http404
+
 from task_manager.tasks.models import Task
 from task_manager.users.models import User
 
@@ -60,9 +62,7 @@ class TaskPermissions:
                     request, _('The task can be deleted only by its author')
                 )
                 return redirect('tasks')
+            return super().dispatch(request, *args, **kwargs)
 
         except (Task.DoesNotExist, User.DoesNotExist):
-            pass
-
-        finally:
             return super().dispatch(request, *args, **kwargs)

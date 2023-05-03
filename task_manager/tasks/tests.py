@@ -158,7 +158,7 @@ class TaskUpdateTestCase(SetUpTestCase):
 class TaskDeleteTestCase(SetUpTestCase):
     def test_task_delete_view(self):
         response = self.client.get(reverse_lazy(
-            'task_delete', kwargs={'pk': 1}
+            'task_delete', kwargs={'pk': 2}
         ))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='tasks/delete.html')
@@ -188,7 +188,7 @@ class TaskDeleteTestCase(SetUpTestCase):
         self.assertRedirects(response, reverse_lazy('tasks'))
 
         messages = list(get_messages(response.wsgi_request))
-        self.assertEqual(len(messages), 2)
+        self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), [
             'The task can be deleted only by its author',
             'Задачу может удалить только её автор',

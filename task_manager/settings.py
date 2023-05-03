@@ -18,9 +18,10 @@ DEBUG = True if DEBUG else False
 
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
     'webserver',
     '.railway.app',
+    '127.0.0.1',
+    '0.0.0.0',
 ]
 
 INSTALLED_APPS = [
@@ -109,8 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'ru-ru'
 
 LANGUAGES = (
     ('en-us', 'English'),
