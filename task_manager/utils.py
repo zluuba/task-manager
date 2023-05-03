@@ -3,8 +3,6 @@ from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from django.http import Http404
-
 from task_manager.tasks.models import Task
 from task_manager.users.models import User
 
