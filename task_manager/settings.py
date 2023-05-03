@@ -14,7 +14,6 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 ROLLBAR_ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 
 DEBUG = os.getenv('DEBUG', False)
-
 RAILWAY_ON = os.getenv('RAILWAY', False)
 
 
@@ -79,26 +78,26 @@ CSRF_TRUSTED_ORIGINS = [
 
 if RAILWAY_ON:
     DATABASE = dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=1800
-        )
+        default=DATABASE_URL,
+        conn_max_age=1800
+    )
 else:
     DATABASE = {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
-DATABASES = {
-    'default': DATABASE,
-}
+DATABASES = {'default': DATABASE}
 
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
         'OPTIONS': {
             'min_length': 3,
         }
