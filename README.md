@@ -70,8 +70,22 @@ If you choose development server, you can also enable bedug messages by writing 
 
 #### Package setup
 
+https://user-images.githubusercontent.com/87614163/235921770-0c2b1414-44d7-4207-859d-42d79d69af6b.mp4
 
-#### Usage
 
+#### Usage: users
+
+https://user-images.githubusercontent.com/87614163/235933792-a5efbd2b-8923-4a1e-840e-73378466ab49.mp4
+
+#### Usage: creating
+
+https://user-images.githubusercontent.com/87614163/235934025-755e9264-c34e-445a-9eb2-94d83937fb0a.mp4
+
+#### Usage: updating & deleting
+
+https://user-images.githubusercontent.com/87614163/235934169-9f074a30-ff34-47b2-9db7-8e59863759f6.mp4
+
+
+---
 
 **by [zluuba](https://github.com/zluuba)**
