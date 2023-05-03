@@ -1,15 +1,16 @@
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
-from django_filters.views import FilterView
-from task_manager.tasks.filters import TaskFilter
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 
-from task_manager.users.models import User
-from task_manager.utils import AuthorizationCheck, TaskPermissions
+from django_filters.views import FilterView
 
-from .models import Task
+from task_manager.utils import AuthorizationCheck, TaskPermissions
+from task_manager.tasks.filters import TaskFilter
+from task_manager.users.models import User
+
 from .forms import TaskForm
+from .models import Task
 
 
 class TasksView(AuthorizationCheck, FilterView):

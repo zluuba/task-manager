@@ -9,24 +9,24 @@ from task_manager.users.models import User
 from .models import Task
 
 
-CLASS_WID = {'class': 'form-control bg-dark text-white'}
+WIDGET = Select(attrs={'class': 'form-control bg-dark text-white'})
 
 
 class TaskFilter(FilterSet):
     status = ModelChoiceFilter(
         label=_('Status'),
         queryset=Status.objects.all(),
-        widget=Select(attrs=CLASS_WID),
+        widget=WIDGET,
     )
     executor = ModelChoiceFilter(
         label=_('Executor'),
         queryset=User.objects.all(),
-        widget=Select(attrs=CLASS_WID),
+        widget=WIDGET,
     )
     labels = ModelChoiceFilter(
         label=_('Label'),
         queryset=Label.objects.all(),
-        widget=Select(attrs=CLASS_WID),
+        widget=WIDGET,
     )
     only_mine_tasks = BooleanFilter(
         label=_('Only my tasks'),

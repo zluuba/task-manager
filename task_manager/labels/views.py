@@ -1,9 +1,9 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.contrib import messages
 
 from task_manager.utils import AuthorizationCheck
 from task_manager.tasks.models import Task

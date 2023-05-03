@@ -3,6 +3,7 @@ from django.contrib.messages import get_messages
 from django.urls import reverse_lazy
 
 from task_manager.users.models import User
+
 from datetime import datetime
 
 
