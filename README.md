@@ -6,8 +6,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/69e4fd04562de82f7d48/test_coverage)](https://codeclimate.com/github/zluuba/python-project-52/test_coverage)
 
 
-Task Manager is a task management system. <br>
-Plan, organize, and collaborate on any project with task management that will fit every need.
+This is a task management system. <br>
+Plan, organize, and collaborate on any project with task management that will fit every need. <br>
 Task Manager can **set tasks**, change their **statuses** and **assign responsibility**. <br>
 **Log in** or **register** to take advantage of all the features.
 
