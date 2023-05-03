@@ -8,17 +8,18 @@
 
 Task Manager is a task management system. <br>
 Plan, organize, and collaborate on any project with task management that will fit every need.
-Task Manager can **set tasks** change their **statuses** and **assign responsibility**. <br>
+Task Manager can **set tasks**, change their **statuses** and **assign responsibility**. <br>
 **Log in** or **register** to take advantage of all the features.
 
-[Web version link](https://railway.app/) <br>
-It's hosted on Railway. If link above doesn't work, you can run the app locally.
+It's [hosted on Railway](https://railway.app/). If link doesn't work, you can run the app locally.
 Check the description below.
 
 
-**gif section**
+![Task-manager](https://user-images.githubusercontent.com/87614163/235889951-af73f69f-479f-4663-a55a-4ef839f13355.gif)
 
-**see more demos link**
+
+[See more demos](https://github.com/zluuba/python-project-52#demos)
+
 
 
 ### Requirements
@@ -59,10 +60,15 @@ Run WSGI server and follow the [link you will see](http://0.0.0.0:8000):
 ```ch
 make start
 ```
-You can run the app locally:
+Or you can use django development server:
 ```ch
 make dev
 ```
+//write about DEBUG in settings.py//
+
+### Afterword
+This project use //technology list//
+
 
 ### Demos
 
