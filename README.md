@@ -52,7 +52,6 @@ nano .env
 Write down the following environment variables (paste your data):
 ```ch
 SECRET_KEY = 'AnySecretKey'
-ACCESS_TOKEN = 'AnyCharactersForAccessToken'
 ```
 
 ### After all package ready to go
@@ -64,10 +63,9 @@ Or you can use django development server:
 ```ch
 make dev
 ```
-//write about DEBUG in settings.py//
 
-### Afterword
-This project use //technology list//
+If you choose development server, you can also enable bedug messages by writing the following line in the .env file:
+"**DEBUG = True**"
 
 
 ### Demos
