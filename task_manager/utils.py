@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.shortcuts import redirect
-from django.contrib import messages
 
 from task_manager.tasks.models import Task
 from task_manager.users.models import User
@@ -31,9 +31,9 @@ class UserPermissions:
 
     def dispatch(self, request, *args, **kwargs):
         current_user = request.user.id
-        chosen_user_id = kwargs['pk']
+        chosen_user = kwargs['pk']
 
-        if current_user != chosen_user_id:
+        if current_user != chosen_user:
             messages.error(
                 request, _('You have no rights to change another user.')
             )

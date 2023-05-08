@@ -20,7 +20,8 @@ class UserUpdateForm(UserChangeForm):
     password = None
 
     password1 = forms.CharField(
-        label=_('Password'), widget=forms.PasswordInput
+        label=_('Password'),
+        widget=forms.PasswordInput
     )
     password2 = forms.CharField(
         label=_('Confirm password'),
