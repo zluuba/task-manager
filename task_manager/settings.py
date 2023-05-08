@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-if RAILWAY_ON or DEBUG:
+if RAILWAY_ON:
     LANGUAGE_CODE = 'en-us'
 else:
     LANGUAGE_CODE = 'ru-ru'
