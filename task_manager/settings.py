@@ -104,12 +104,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'ru-ru'
+if RAILWAY_ON or DEBUG:
+    LANGUAGE_CODE = 'en-us'
+else:
+    LANGUAGE_CODE = 'ru-ru'
 
 LANGUAGES = (
     ('en-us', 'English'),
-    ('ru', 'Russian'),
+    ('ru-ru', 'Russian'),
 )
 
 LOCALE_PATHS = (
