@@ -16,7 +16,6 @@ Check the description below.
 
 ![Task-manager](https://user-images.githubusercontent.com/87614163/235889951-af73f69f-479f-4663-a55a-4ef839f13355.gif)
 
-
 [See more demos](https://github.com/zluuba/task-manager#demos)
 
 
@@ -24,11 +23,12 @@ Check the description below.
 ### Requirements
 
 - [python](https://www.python.org/), version 3.9 or higher
-- [poetry](https://python-poetry.org/docs/#installation), version 1.0.0 or higher
+- [poetry](https://python-poetry.org/docs/#installation), version 1.2.0 or higher
 
 
 ### Installation
 
+Open terminal window.
 Clone this repo or download it with pip:
 ```ch
 git clone https://github.com/zluuba/task-manager.git
@@ -43,11 +43,11 @@ cd task-manager
 make install
 ```
 
-### Create .env file
-
+Create .env file
 ```ch
 nano .env
 ```
+
 Write down the following environment variables (paste your data):
 ```ch
 SECRET_KEY = 'AnySecretKey'
@@ -62,7 +62,7 @@ Or you can use django development server:
 ```ch
 make dev
 ```
-If you choose development server, you can also enable bedug messages by writing the following line in the .env file:
+If you choose development server, you can also enable bedug mode by writing the following line in the .env file:
 "**DEBUG = True**"
 
 
