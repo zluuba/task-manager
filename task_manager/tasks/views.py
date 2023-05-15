@@ -70,7 +70,8 @@ class TaskUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
 
 
 class TaskDeleteView(
-    TaskPermissions, AuthorizationCheck, SuccessMessageMixin, DeleteView
+    AuthorizationCheck, TaskPermissions,
+    SuccessMessageMixin, DeleteView
 ):
     model = Task
     template_name = 'tasks/delete.html'

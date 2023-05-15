@@ -1,11 +1,9 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.utils.translation import gettext as _
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.views import LoginView
-from django.contrib.auth import logout
-from django.shortcuts import redirect
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
-from django.views import View
+from django.utils.translation import gettext as _
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 from task_manager.utils import AuthorizationCheck, UserPermissions
@@ -41,11 +39,12 @@ class UserLoginView(SuccessMessageMixin, LoginView):
         return reverse_lazy('home')
 
 
-class UserLogout(View):
-    def get(self, request):
-        logout(request)
+class UserLogoutView(SuccessMessageMixin, LogoutView):
+    template_name = 'index.html'
+
+    def dispatch(self, request, *args, **kwargs):
         messages.info(request, _('You are logged out'))
-        return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):

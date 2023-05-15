@@ -50,12 +50,10 @@ class TaskPermissions:
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            task_author = str(Task.objects.get(pk=kwargs['pk']).author)
-            curr_user = str(
-                User.objects.get(username=request.user).get_fullname()
-            )
+            current_user = User.objects.get(username=request.user).pk
+            task_author = Task.objects.get(pk=kwargs['pk']).author.pk
 
-            if curr_user != task_author:
+            if current_user != task_author:
                 messages.error(
                     request, _('The task can be deleted only by its author')
                 )

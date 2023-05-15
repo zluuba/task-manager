@@ -67,12 +67,13 @@ class StatusDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
         form = self.get_form()
 
         if form.is_valid():
-            if not tasks_with_status:
-                return self.form_valid(form)
+            if tasks_with_status:
+                messages.error(
+                    self.request,
+                    _('It is not possible to delete a status '
+                      'because it is in use')
+                )
+                return redirect('statuses')
+            return self.form_valid(form)
 
-            messages.error(
-                self.request,
-                _('It is not possible to delete a status because it is in use')
-            )
-            return redirect('statuses')
         return self.form_invalid(form)
