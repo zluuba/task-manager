@@ -62,7 +62,7 @@ class TaskCreateTestCase(SetUpTestCase):
     def test_task_create_view(self):
         response = self.client.get(reverse_lazy('task_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='tasks/create.html')
 
     def test_task_create_success(self):
         response = self.client.post(
@@ -117,7 +117,7 @@ class TaskUpdateTestCase(SetUpTestCase):
             'task_update', kwargs={'pk': 1}
         ))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='tasks/update.html')
 
     def test_task_update_success(self):
         response = self.client.post(

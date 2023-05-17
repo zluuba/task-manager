@@ -50,7 +50,7 @@ class StatusCreateTestCase(SetUpTestCase):
     def test_status_create_view(self):
         response = self.client.get(reverse_lazy('status_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='statuses/create.html')
 
     def test_status_create_success(self):
         response = self.client.post(
@@ -90,7 +90,7 @@ class StatusUpdateTestCase(SetUpTestCase):
             'status_update', kwargs={'pk': 1}
         ))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='statuses/update.html')
 
     def test_status_update_success(self):
         response = self.client.post(

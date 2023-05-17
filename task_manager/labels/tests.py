@@ -38,7 +38,7 @@ class LabelCreateTestCase(SetUpTestCase):
     def test_label_create_view(self):
         response = self.client.get(reverse_lazy('label_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='labels/create.html')
 
     def test_label_create_success(self):
         response = self.client.post(
@@ -79,7 +79,7 @@ class LabelUpdateTestCase(SetUpTestCase):
             'label_update', kwargs={'pk': 1}
         ))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='labels/update.html')
 
     def test_label_update_success(self):
         response = self.client.post(

@@ -97,7 +97,7 @@ class UserUpdateTestCase(SetUpTestCase):
         response = self.client.get(reverse_lazy('users_update',
                                                 kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='users/update.html')
 
     def test_user_update_success(self):
         response = self.client.post(
@@ -206,7 +206,7 @@ class UserLoginTestCase(SetUpTestCase):
     def test_user_login_view(self):
         response = self.client.get(reverse_lazy('login'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='users/login.html')
 
     def test_user_login_post(self):
         incorrect_login = self.client.login(
