@@ -10,14 +10,13 @@ Plan, organize, and collaborate on any project with task management that will fi
 Task Manager can **set tasks**, change their **statuses** and **assign responsibility**. <br>
 **Log in** or **register** to take advantage of all the features.
 
-It's [hosted on Railway](https://task-manager-production-70cb.up.railway.app/). If link doesn't work, you can run the app locally.
-Check the description below.
+It's [hosted on Railway](https://task-manager-production-70cb.up.railway.app/). <br>
+If link doesn't work, you can run the app locally. Check the description below.
 
 
 ![Task-manager](https://user-images.githubusercontent.com/87614163/235889951-af73f69f-479f-4663-a55a-4ef839f13355.gif)
 
 [See more demos](https://github.com/zluuba/task-manager#demos)
-
 
 
 ### Requirements
@@ -43,18 +42,46 @@ cd task-manager
 make install
 ```
 
-Create .env file
+
+### Environment
+
+**Create .env file**. I prefer the text editor Nano, but you can do it any way you want:
+1. Create .env file and open it with Nano:
+    ```ch
+    nano .env
+    ```
+2. Write down the secret key variable (paste your data after the equal sign):
+    ```
+    SECRET_KEY=AnySecretKey
+    ```
+3. Save this file using **CTRL + O** and Enter.
+4. And close it with **CTRL + X**.
+
+
+### Migrations, linter & tests
+
+First of all, it is necessary to apply all **migrations** in this project. <br>
+The next command creates migrations and applies them:
 ```ch
-nano .env
+make migrations
 ```
 
-Write down the following environment variables (paste your data):
+This command starts the **linter** (using flake8) and checks the current project for cleanliness:
 ```ch
-SECRET_KEY = 'AnySecretKey'
+make lint
 ```
+
+You can also run **tests** and make sure that the project works correctly with this command:
+```ch
+make test
+```
+
+Check the Makefile at the root of this project to see all available commands.
+
 
 ### After all package ready to go
-Run WSGI server and follow the [link you will see](http://0.0.0.0:8000):
+
+Run WSGI server:
 ```ch
 make start
 ```
@@ -62,8 +89,23 @@ Or you can use django development server:
 ```ch
 make dev
 ```
-If you choose development server, you can also enable bedug mode by writing the following line in the .env file:
-"**DEBUG = True**"
+
+
+### Additional environment variables
+
+There are other useful environment variables in this project. <br>
+To enable it, insert any of the following variables into the **.env** file on a new line >>
+
+1. **Debug**. If you selected the development server (using the make dev command) 
+   to enable debug mode and include all detailed data on errors, add this variable:
+   ```ch
+   DEBUG=True
+   ```
+2. **Rollbar** access token. **[Rollbar](https://rollbar.com/)** - crash reporting, error tracking, logging and error monitoring,
+   he will warn you if something goes wrong. To enable it, you need to get an access token in your personal Rollbar account and add it as follows:
+   ```ch
+   ACCESS_TOKEN=YourRollbarAccessToken
+   ```
 
 
 ### Demos
