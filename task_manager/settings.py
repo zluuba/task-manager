@@ -8,13 +8,14 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DEBUG = os.getenv('DEBUG')
+DEBUG = True if DEBUG and DEBUG != '0' else False
+
 SECRET_KEY = os.getenv('SECRET_KEY')
 DATABASE_URL = os.getenv("DATABASE_URL")
+RAILWAY_ON = os.getenv('RAILWAY', False)
 
 ROLLBAR_ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
-
-DEBUG = os.getenv('DEBUG', False)
-RAILWAY_ON = os.getenv('RAILWAY', False)
 
 
 ALLOWED_HOSTS = [
