@@ -5,27 +5,29 @@ from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from task_manager.utils import AuthorizationCheck
+from task_manager.utils import AuthorizationCheckMixin
 from task_manager.tasks.models import Task
 
 from .models import Label
 from .forms import LabelForm
 
 
-class LabelsView(AuthorizationCheck, ListView):
+class LabelsView(AuthorizationCheckMixin, ListView):
     model = Label
     context_object_name = 'labels'
     template_name = 'labels/labels.html'
 
 
-class LabelCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
+class LabelCreateView(AuthorizationCheckMixin,
+                      SuccessMessageMixin, CreateView):
     form_class = LabelForm
     template_name = 'labels/create.html'
     success_url = reverse_lazy('labels')
     success_message = _('Label successfully created')
 
 
-class LabelUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
+class LabelUpdateView(AuthorizationCheckMixin,
+                      SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelForm
     template_name = 'labels/update.html'
@@ -33,7 +35,8 @@ class LabelUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     success_message = _('Label successfully updated')
 
 
-class LabelDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
+class LabelDeleteView(AuthorizationCheckMixin,
+                      SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels')

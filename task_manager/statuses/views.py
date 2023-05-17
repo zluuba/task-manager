@@ -5,27 +5,29 @@ from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from task_manager.utils import AuthorizationCheck
+from task_manager.utils import AuthorizationCheckMixin
 from task_manager.tasks.models import Task
 
 from .models import Status
 from .forms import StatusForm
 
 
-class StatusesView(AuthorizationCheck, ListView):
+class StatusesView(AuthorizationCheckMixin, ListView):
     model = Status
     context_object_name = 'statuses'
     template_name = 'statuses/statuses.html'
 
 
-class StatusCreateView(AuthorizationCheck, SuccessMessageMixin, CreateView):
+class StatusCreateView(AuthorizationCheckMixin,
+                       SuccessMessageMixin, CreateView):
     form_class = StatusForm
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('statuses')
     success_message = _('Status successfully created')
 
 
-class StatusUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
+class StatusUpdateView(AuthorizationCheckMixin,
+                       SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
     template_name = 'statuses/update.html'
@@ -33,7 +35,8 @@ class StatusUpdateView(AuthorizationCheck, SuccessMessageMixin, UpdateView):
     success_message = _('Status successfully updated')
 
 
-class StatusDeleteView(AuthorizationCheck, SuccessMessageMixin, DeleteView):
+class StatusDeleteView(AuthorizationCheckMixin,
+                       SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses')

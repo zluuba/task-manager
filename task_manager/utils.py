@@ -12,7 +12,7 @@ from task_manager.tasks.models import Task
 from django.http import Http404
 
 
-class AuthorizationCheck(LoginRequiredMixin):
+class AuthorizationCheckMixin(LoginRequiredMixin):
     """
     Checks permissions to the pages.
     If user isn't logged in, redirects to the login page.
@@ -27,7 +27,7 @@ class AuthorizationCheck(LoginRequiredMixin):
         return str(self.login_url)
 
 
-class UserPermissions(UserPassesTestMixin):
+class UserPermissionsMixin(UserPassesTestMixin):
     """
     Checks updating / deleting (user profile) permissions.
     If the selected user is not the current user,
@@ -50,7 +50,7 @@ class UserPermissions(UserPassesTestMixin):
         return super().handle_no_permission()
 
 
-class TaskPermissions(UserPassesTestMixin):
+class TaskPermissionsMixin(UserPassesTestMixin):
     """
     Checks permissions to task deleting.
     If the user is not the author of the task, task will not be deleted.

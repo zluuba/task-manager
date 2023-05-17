@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from task_manager.utils import AuthorizationCheck, UserPermissions
+from task_manager.utils import AuthorizationCheckMixin, UserPermissionsMixin
 from task_manager.tasks.models import Task
 
 from .forms import UserCreateForm, UserUpdateForm, LoginForm
@@ -46,9 +46,8 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = _('User is successfully registered')
 
 
-class UserUpdateView(
-    AuthorizationCheck, UserPermissions, SuccessMessageMixin, UpdateView
-):
+class UserUpdateView(AuthorizationCheckMixin, UserPermissionsMixin,
+                     SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'users/update.html'
@@ -56,9 +55,8 @@ class UserUpdateView(
     success_message = _('User is successfully updated')
 
 
-class UserDeleteView(
-    AuthorizationCheck, UserPermissions, SuccessMessageMixin, DeleteView
-):
+class UserDeleteView(AuthorizationCheckMixin, UserPermissionsMixin,
+                     SuccessMessageMixin, DeleteView):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users')
