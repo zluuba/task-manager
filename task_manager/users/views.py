@@ -17,23 +17,12 @@ class UsersView(ListView):
     model = User
     context_object_name = 'users'
     template_name = 'users/users.html'
-    extra_context = {
-        'title': _('Users'),
-        'fields': ['ID', _('Username'), _('Full name'),
-                   _('Created at'), ''],
-        'edit_btn': _('Edit'),
-        'delete_btn': _('Delete'),
-    }
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = LoginForm
-    template_name = 'form.html'
+    template_name = 'users/login.html'
     success_message = _('You are logged in')
-    extra_context = {
-        'title': _('Sign in'),
-        'button': _('Enter'),
-    }
 
     def get_success_url(self):
         return reverse_lazy('home')
@@ -52,13 +41,9 @@ class UserLogoutView(SuccessMessageMixin, LogoutView):
 
 class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = UserCreateForm
-    template_name = 'form.html'
+    template_name = 'users/create.html'
     success_url = reverse_lazy('login')
     success_message = _('User is successfully registered')
-    extra_context = {
-        'title': _('Sign up'),
-        'button': _('Register'),
-    }
 
 
 class UserUpdateView(
@@ -66,13 +51,9 @@ class UserUpdateView(
 ):
     model = User
     form_class = UserUpdateForm
-    template_name = 'form.html'
+    template_name = 'users/update.html'
     success_url = reverse_lazy('users')
     success_message = _('User is successfully updated')
-    extra_context = {
-        'title': _('Update user'),
-        'button': _('Update'),
-    }
 
 
 class UserDeleteView(
@@ -82,11 +63,6 @@ class UserDeleteView(
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users')
     success_message = _('User successfully deleted')
-    extra_context = {
-        'title': _('Delete user'),
-        'text': _('Are you sure you want to delete '),
-        'button': _('Yes, delete'),
-    }
 
     def form_valid(self, form):
         user_id = self.request.user.pk
