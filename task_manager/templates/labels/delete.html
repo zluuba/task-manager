@@ -1,29 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'delete.html' %}
 
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %} {{ title }} {% endblock %}
+{% block title %}{% trans 'Delete label' %}{% endblock %}
 
-{% block body %}
-
-    <div class="container wrapper flex-grow-1 mt-5">
-        <div class="bg-dark text-light center-block">
-            <div class="card-body p-5 text-center">
-                {% if request.user.is_authenticated %}
-                    <p class="display-4 mt-5 mb-4">{{ title }}</p>
-                    <p class="lead mx-auto mb-1 w-50">
-                        {{ text }} {{ label.name }}?
-                    </p>
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="form-group text-center mt-4">
-                            {% bootstrap_button button button_type="submit" button_class="btn btn-outline-danger" %}
-                        </div>
-                    </form>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-{% endblock %}
+{% block content %}{{ label.name }}{% endblock %}

@@ -3,43 +3,38 @@
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %} {{ title }} {% endblock %}
-
 {% block body %}
 
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
         <div class="d-flex my-3">
-            <h1 class="flex-grow-1">{{ title }}</h1>
-            <a class="btn btn-outline-primary align-self-center" href="{% url 'status_create' %}" role="button">
-                {{ create_btn }}
-            </a>
+            <h1 class="flex-grow-1">{% trans 'Statuses' %}</h1>
+            {% trans 'Create status' as create_btn %}
+            {% url 'status_create' as create_url %}
+            {% bootstrap_button create_btn button_class="btn btn-outline-primary align-self-center" href=create_url %}
         </div>
         <table class="table table-striped">
             <thead>
                 <tr class="bg-dark text-light">
-                    {% for field in fields %}
-                        <th>{{ field }}</th>
-                    {% endfor %}
+                    <th>ID</th>
+                    <th>{% trans 'Name' %}</th>
+                    <th>{% trans 'Created at' %}</th>
+                    <th></th>
                 </tr>
             </thead>
-        <tbody>
-        {% for status in statuses %}
-        <tr class="bg-dark text-light">
-            <td>{{ status.id }}</td>
-            <td>{{ status.name }}</td>
-            <td>
-                {{ status.created_at|date:"d.m.Y " }}
-                <br>
-                {{ status.created_at|date:"H:i" }}
-            </td>
-            <td>
-                <a href="{% url 'status_update' status.id %}">{{ edit_btn }}</a>
-                <br>
-                <a href="{% url 'status_delete' status.id %}">{{ delete_btn }}</a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
+            <tbody>
+            {% for status in statuses %}
+            <tr class="bg-dark text-light">
+                <td>{{ status.id }}</td>
+                <td>{{ status.name }}</td>
+                <td>{{ status.created_at|date:"d.m.Y " }}<br>{{ status.created_at|date:"H:i" }}</td>
+                <td>
+                    <a href="{% url 'status_update' status.id %}">{% trans 'Edit' %}</a>
+                    <br>
+                    <a href="{% url 'status_delete' status.id %}">{% trans 'Delete' %}</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
         </table>
     </div>
 

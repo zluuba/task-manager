@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block body %}
+
+    <div class="container wrapper flex-grow-1 mt-5">
+        <div class="bg-dark text-light center-block">
+            <div class="card-body p-5 text-center">
+                {% if request.user.is_authenticated %}
+                    <p class="display-4 mt-5 mb-4">
+                        {% block title %}{% endblock %}
+                    </p>
+                    <p class="lead mx-auto mb-1 w-50">
+                        {% trans 'Are you sure you want to delete ' %}
+                        {% block content %}{% endblock %}?
+                    </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group text-center mt-4">
+                            {% trans 'Yes, delete' as del_btn %}
+                            {% bootstrap_button del_btn button_type="submit" button_class="btn btn-outline-danger" %}
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

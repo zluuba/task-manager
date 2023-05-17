@@ -3,13 +3,12 @@
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %} {{ title }} {% endblock %}
-
 {% block body %}
 
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
         <div class="d-flex my-3">
-            <h1 class="flex-grow-1">{{ title }}</h1>
+            <h1 class="flex-grow-1">{% trans 'Tasks' %}</h1>
+            {% trans 'Create task' as create_btn %}
             {% url 'task_create' as create_url %}
             {% bootstrap_button create_btn button_class="btn btn-outline-primary align-self-center" href=create_url %}
         </div>
@@ -17,8 +16,9 @@
         <div class="card mb-3 border-secondary mb-3">
             <div class="card-body bg-dark">
                 <form class="form-inline center" method="get">
-                  {% bootstrap_form filter.form field_class="mx-4" %}
-                  {% bootstrap_button filter_btn button_type="submit" button_class="btn btn-outline-primary" %}
+                    {% trans 'Show' as filter_btn %}
+                    {% bootstrap_form filter.form field_class="mx-4" %}
+                    {% bootstrap_button filter_btn button_type="submit" button_class="btn btn-outline-primary" %}
                 </form>
             </div>
         </div>
@@ -26,32 +26,32 @@
         <table class="table table-striped">
             <thead>
                 <tr class="bg-dark text-light">
-                    {% for field in fields %}
-                        <th>{{ field }}</th>
-                    {% endfor %}
+                    <th>ID</th>
+                    <th>{% trans 'Name' %}</th>
+                    <th>{% trans 'Status' %}</th>
+                    <th>{% trans 'Author' %}</th>
+                    <th>{% trans 'Executor' %}</th>
+                    <th>{% trans 'Created at' %}</th>
+                    <th></th>
                 </tr>
             </thead>
-        <tbody>
-        {% for task in tasks %}
-        <tr class="bg-dark text-light">
-            <td>{{ task.id }}</td>
-            <td><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
-            <td>{{ task.status }}</td>
-            <td>{{ task.author }}</td>
-            <td>{% if task.executor %}{{ task.executor }}{% endif %}</td>
-            <td>
-                {{ task.created_at|date:"d.m.Y " }}
-                <br>
-                {{ task.created_at|date:"H:i" }}
-            </td>
-            <td>
-                <a href="{% url 'task_update' task.pk %}">{{ edit_btn }}</a>
-                <br>
-                <a href="{% url 'task_delete' task.pk %}">{{ delete_btn }}</a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
+            <tbody>
+            {% for task in tasks %}
+                <tr class="bg-dark text-light">
+                    <td>{{ task.id }}</td>
+                    <td><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
+                    <td>{{ task.status }}</td>
+                    <td>{{ task.author }}</td>
+                    <td>{% if task.executor %}{{ task.executor }}{% endif %}</td>
+                    <td>{{ task.created_at|date:"d.m.Y " }}<br>{{ task.created_at|date:"H:i" }}</td>
+                    <td>
+                        <a href="{% url 'task_update' task.pk %}">{% trans 'Edit' %}</a>
+                        <br>
+                        <a href="{% url 'task_delete' task.pk %}">{% trans 'Delete' %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
         </table>
     </div>
 

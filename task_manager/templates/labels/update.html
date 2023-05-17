@@ -1,0 +1,11 @@
+{% extends 'form.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}{% trans 'Update label' %}{% endblock %}
+
+{% block button %}
+{% trans 'Update' as button %}
+{% bootstrap_button button button_type="submit" button_class="btn btn-outline-primary" %}
+{% endblock %}

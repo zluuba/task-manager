@@ -3,12 +3,10 @@
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %} {{ title }} {% endblock %}
-
 {% block body %}
 
     <div class="container wrapper flex-grow-1 mt-5 bg-dark text-light">
-        <h1 class="my-4">{{ title }}</h1>
+        <h1 class="my-4">{% trans 'Task preview' %}</h1>
         <div class="card">
             <div class="card-header bg-dark text-info border-bottom">
                 <h2 class="mb-1">{{ task.name }}</h2>
@@ -46,12 +44,13 @@
                     </div>
 
                     <div class="row p-2 mt-2 d-flex justify-content-end">
-                        <a class="btn btn-outline-primary mr-2" href="{% url 'task_update' task.id %}" role="button">
-                            {{ edit_btn }}
-                        </a>
-                        <a class="btn btn-outline-danger" href="{% url 'task_delete' task.id %}" role="button">
-                            {{ delete_btn }}
-                        </a>
+                        {% trans 'Edit' as edit_btn %}
+                        {% url 'task_update' task.id as update_url %}
+                        {% bootstrap_button edit_btn button_class="btn btn-outline-primary mr-2" href=update_url %}
+
+                        {% trans 'Delete' as delete_btn %}
+                        {% url 'task_delete' task.id as delete_url %}
+                        {% bootstrap_button delete_btn button_class="btn btn-outline-danger" href=delete_url %}
                     </div>
                 </div>
             </div>

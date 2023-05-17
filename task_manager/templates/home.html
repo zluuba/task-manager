@@ -3,7 +3,7 @@
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %} {{ title }} {% endblock %}
+{% block title %} {% trans 'Task manager' %} {% endblock %}
 
 {% block body %}
 
@@ -21,8 +21,10 @@
                     <p class="display-4 mt-5 mb-4">{% trans 'Hello there' %}</p>
                     <p class="mx-auto w-50">
                     <p class="lead">{% trans 'This is the Task Manager,' %}</p>
-                    <p class="text-center mx-auto w-75">{% trans 'I allow you to set tasks, assign performers and change their statuses.' %}
-                    {% trans 'Registration and authentication are required to work with my system.' %}</p>
+                    <p class="text-center mx-auto w-75">
+                        {% trans 'I allow you to set tasks, assign performers and change their statuses.' %}
+                        {% trans 'Registration and authentication are required to work with my system.' %}
+                    </p>
                 {% endif %}
             </div>
         </div>
