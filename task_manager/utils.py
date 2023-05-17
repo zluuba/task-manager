@@ -1,10 +1,15 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, UserPassesTestMixin
+)
+from django.contrib import messages
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
-from task_manager.tasks.models import Task
 from task_manager.users.models import User
+from task_manager.tasks.models import Task
+
+from django.http import Http404
 
 
 class AuthorizationCheck(LoginRequiredMixin):
@@ -13,52 +18,60 @@ class AuthorizationCheck(LoginRequiredMixin):
     If user isn't logged in, redirects to the login page.
     """
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.error(
-                request, _('You are not logged in! Please log in.')
-            )
-            return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
+    login_url = reverse_lazy('login')
+    permission_denied_message = _('You are not logged in! Please log in.')
+    redirect_field_name = None
+
+    def get_login_url(self):
+        messages.error(self.request, self.permission_denied_message)
+        return str(self.login_url)
 
 
-class UserPermissions:
+class UserPermissions(UserPassesTestMixin):
     """
-    Checks updating / deleting (user acc) permissions.
+    Checks updating / deleting (user profile) permissions.
     If the selected user is not the current user,
     user will not be updating / deleting.
     """
 
-    def dispatch(self, request, *args, **kwargs):
-        current_user = request.user.id
-        chosen_user = kwargs['pk']
+    def test_func(self):
+        current_user = self.request.user.id
+        chosen_user = self.kwargs['pk']
 
         if current_user != chosen_user:
-            messages.error(
-                request, _('You have no rights to change another user.')
-            )
-            return redirect('users')
+            return False
+        return True
 
-        return super().dispatch(request, *args, **kwargs)
+    def handle_no_permission(self):
+        if self.raise_exception or self.request.user.is_authenticated:
+            messages.error(self.request,
+                           _('You have no rights to change another user.'))
+            return redirect(reverse_lazy('users'))
+        return super().handle_no_permission()
 
 
-class TaskPermissions:
+class TaskPermissions(UserPassesTestMixin):
     """
     Checks permissions to task deleting.
     If the user is not the author of the task, task will not be deleted.
     """
 
-    def dispatch(self, request, *args, **kwargs):
+    def test_func(self):
+        current_user = self.request.user.id
+        task_id = self.kwargs['pk']
+
         try:
-            current_user = User.objects.get(username=request.user).pk
-            task_author = Task.objects.get(pk=kwargs['pk']).author.pk
-
-            if current_user != task_author:
-                messages.error(
-                    request, _('The task can be deleted only by its author')
-                )
-                return redirect('tasks')
-            return super().dispatch(request, *args, **kwargs)
-
+            task_author = Task.objects.get(pk=task_id).author.pk
         except (Task.DoesNotExist, User.DoesNotExist):
-            return super().dispatch(request, *args, **kwargs)
+            raise Http404
+
+        if current_user != task_author:
+            return False
+        return True
+
+    def handle_no_permission(self):
+        if self.raise_exception or self.request.user.is_authenticated:
+            messages.error(self.request,
+                           _('The task can be deleted only by its author'))
+            return redirect(reverse_lazy('tasks'))
+        return super().handle_no_permission()
