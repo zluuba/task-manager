@@ -19,13 +19,13 @@ If link doesn't work, you can run the app locally. Check the description below.
 [See more demos](https://github.com/zluuba/task-manager#demos)
 
 
-### Requirements
+## Requirements
 
 - [python](https://www.python.org/), version 3.9 or higher
 - [poetry](https://python-poetry.org/docs/#installation), version 1.2.0 or higher
 
 
-### Installation
+## Installation
 
 Open terminal window.
 Clone this repo or download it with pip:
@@ -43,7 +43,7 @@ make install
 ```
 
 
-### Environment
+## Environment
 
 **Create .env file**. I prefer the text editor Nano, but you can do it any way you want:
 1. Create .env file and open it with Nano:
@@ -58,7 +58,7 @@ make install
 4. And close it with **CTRL + X**.
 
 
-### Migrations, linter & tests
+## Migrations, linter & tests
 
 First of all, it is necessary to apply all **migrations** in this project. <br>
 The next command creates migrations and applies them:
@@ -79,7 +79,7 @@ make test
 Check the Makefile at the root of this project to see all available commands.
 
 
-### After all package ready to go
+## After all package ready to go
 
 Run WSGI server:
 ```ch
@@ -90,14 +90,15 @@ Or you can use django development server:
 make dev
 ```
 
+And follow the [link you will see](http://0.0.0.0:8000) in the terminal window. <br>
 
-### Additional environment variables
+
+## Additional environment variables
 
 There are other useful environment variables in this project. <br>
 To enable it, insert any of the following variables into the **.env** file on a new line >>
 
-1. **Debug**. If you selected the development server (using the make dev command) 
-   to enable debug mode and include all detailed data on errors, add this variable:
+1. **Debug**. To enable debug mode and include all detailed data on errors, add this variable:
    ```ch
    DEBUG=True
    ```
@@ -108,23 +109,18 @@ To enable it, insert any of the following variables into the **.env** file on a 
    ```
 
 
-### Demos
+## Demos
 
-#### Package setup
-
+### Package setup
 https://user-images.githubusercontent.com/87614163/235921770-0c2b1414-44d7-4207-859d-42d79d69af6b.mp4
 
-
-#### Usage: users
-
+### Usage: users
 https://user-images.githubusercontent.com/87614163/235933792-a5efbd2b-8923-4a1e-840e-73378466ab49.mp4
 
-#### Usage: creating
-
+### Usage: creating
 https://user-images.githubusercontent.com/87614163/235934025-755e9264-c34e-445a-9eb2-94d83937fb0a.mp4
 
-#### Usage: updating & deleting
-
+### Usage: updating & deleting
 https://user-images.githubusercontent.com/87614163/235934169-9f074a30-ff34-47b2-9db7-8e59863759f6.mp4
 
 
