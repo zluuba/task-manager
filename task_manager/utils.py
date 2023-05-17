@@ -5,11 +5,10 @@ from django.contrib.auth.mixins import (
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.http import Http404
 
 from task_manager.users.models import User
 from task_manager.tasks.models import Task
-
-from django.http import Http404
 
 
 class AuthorizationCheckMixin(LoginRequiredMixin):

@@ -1,5 +1,5 @@
-from django.contrib import admin
 from django.urls import path, include
+from django.contrib import admin
 
 from task_manager.users.views import UserLoginView, UserLogoutView
 from task_manager.views import HomeView
