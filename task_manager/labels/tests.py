@@ -92,7 +92,7 @@ class LabelUpdateTestCase(SetUpTestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), [
-            'Label is successfully updated',
+            'Label successfully updated',
             'Метка успешно изменена',
         ])
 

@@ -131,7 +131,7 @@ class TaskUpdateTestCase(SetUpTestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), [
-            'Task is successfully updated',
+            'Task successfully updated',
             'Задача успешно изменена',
         ])
 
