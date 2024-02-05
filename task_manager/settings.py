@@ -105,10 +105,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-if RAILWAY_ON:
-    LANGUAGE_CODE = 'en-us'
-else:
-    LANGUAGE_CODE = 'ru-ru'
+# if RAILWAY_ON:
+#     LANGUAGE_CODE = 'en-us'
+# else:
+#     LANGUAGE_CODE = 'ru-ru'
+
+LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (
     ('en-us', 'English'),
