@@ -1,6 +1,5 @@
 # Task Manager
 
-[![Actions Status](https://github.com/zluuba/python-project-52/workflows/hexlet-check/badge.svg)](https://github.com/zluuba/python-project-52/actions)
 [![Project Check](https://github.com/zluuba/python-project-52/actions/workflows/project-check.yml/badge.svg)](https://github.com/zluuba/python-project-52/actions/workflows/project-check.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/69e4fd04562de82f7d48/maintainability)](https://codeclimate.com/github/zluuba/python-project-52/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/69e4fd04562de82f7d48/test_coverage)](https://codeclimate.com/github/zluuba/python-project-52/test_coverage)
