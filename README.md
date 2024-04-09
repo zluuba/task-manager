@@ -9,8 +9,8 @@ Plan, organize, and collaborate on any project with task management that will fi
 Task Manager can **set tasks**, change their **statuses** and **assign responsibility**. <br>
 **Log in** or **register** to take advantage of all the features.
 
-It's [hosted on Railway](https://task-manager-production-70cb.up.railway.app/). <br>
-If link doesn't work, you can run the app locally. Check the description below.
+It's [hosted on my website](https://task-manager.zluuba.art/). <br>
+To run the app locally, check the description below.
 
 
 ![Task-manager](https://user-images.githubusercontent.com/87614163/235889951-af73f69f-479f-4663-a55a-4ef839f13355.gif)
