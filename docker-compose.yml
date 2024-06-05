@@ -1,0 +1,23 @@
+version: '2.17'
+
+services:
+  tm_db:
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: "tm_db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+
+  tm_web:
+    build: .
+    command: python /app/manage.py runserver 0.0.0.0:4040
+    volumes:
+      - .:/app
+    ports:
+      - 4040:4040
+    depends_on:
+      - tm_db
+
+volumes:
+  postgres_data:
