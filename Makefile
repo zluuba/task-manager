@@ -22,3 +22,7 @@ test:
 test-coverage:
 	poetry run coverage run manage.py test
 	poetry run coverage xml --include=task_manager/* --omit=task_manager/settings.py
+
+run:
+	docker-compose up
+	docker-compose exec tm_web python manage.py migrate --noinput
