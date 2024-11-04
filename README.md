@@ -9,7 +9,7 @@ Plan, organize, and collaborate on any project with task management that will fi
 Task Manager can **set tasks**, change their **statuses** and **assign responsibility**. <br>
 **Log in** or **register** to take advantage of all the features.
 
-It's [hosted on my website](https://task-manager.zluuba.art/). <br>
+It's [hosted on my website](https://task-manager.zluuba.ru/). <br>
 To run the app locally, check the description below.
 
 
